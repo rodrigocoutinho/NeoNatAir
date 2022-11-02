@@ -28,8 +28,16 @@ O NeoNatAir auxiliará os cuidados do ambiente UTIN através do monitoramento da
 ## Instalação
 - npm install
 
+## Start backend e frontend
+- Dentro da pasta backend
+- npm run dev
+
 ## Start backend
 - node api.js
+ou
+- nodemon api.js
 
 ## Start frontend
+- npm run dev
+ou
 - yarn run dev
