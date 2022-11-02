@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import { Amostragem } from "./models/amostragemModel.js";
-import 'dotenv/config';
 
 const serverURL = 'https://backend-api-airpure.vercel.app'
 
@@ -10,10 +9,17 @@ let TOKEN = null
 export async function LoginAirPure(req,res){
 
     const loginBody = JSON.stringify({
-        usr: process.env.ACESS_USER,
-        pass: process.env.ACESS_PASS
+        //senha: teste
+        //usr: "heitor1", 
+        //pass: "698dc19d489c4e4db73e28a713eab07b"
+    
+        //senha: 12345678
+        usr: "inf",
+        pass: "25d55ad283aa400af464c76d713c07ad"
     })
     
+    "p2qf31a2m7psxzc2e3ddcl"
+
     const airPureResponse = await fetch(`${serverURL}/api/login`,{
         method: "POST",
         headers:{
@@ -67,8 +73,6 @@ export async function GetLeiturasDia(req,res){
     let idAmbiente = req.params.idAmbiente;
     let data = req.params.data;
 
-    console.log("aaaaa:", parametro, idAmbiente, data);
-
 
     const airPureResponse = await fetch(`${serverURL}/api/mediaDia/${parametro}/${idAmbiente}/${data}`, {
         method: "GET",
@@ -81,7 +85,6 @@ export async function GetLeiturasDia(req,res){
     res.status(airPureResponse.status)
     let body = await airPureResponse.json()
     res.json(body)
-   // res.json(await airPureResponse.json())
 }
 
 //consulta última leitura
@@ -91,7 +94,7 @@ export async function GetUltimaLeitura(req,res){
 
     let idAmbiente = req.params.idAmbiente;
 
-    const airPureResponse = await fetch(`${serverURL}/api/ultimoValor/3`, {
+    const airPureResponse = await fetch(`${serverURL}/api/ultimoValor/2`, {
         method: "GET",
         headers:{
             'sessiontoken': TOKEN, 

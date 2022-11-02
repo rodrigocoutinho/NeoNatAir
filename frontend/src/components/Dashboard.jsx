@@ -1,18 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, forwardRef } from 'react'
-import axios from 'axios';
-import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import Chart from "react-apexcharts";
-import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container, Typography ,Button } from '@mui/material';
 import AppWidgetSummary from './dashboard/app/AppWidgetSummary';
-import { useTheme } from '@emotion/react';
-import { Box } from '@mui/system';
 import useFetch from '../useFetch';
-import { toast, Slide, ToastContainer } from 'react-toastify';
-import { element } from 'prop-types';
 import Alert from 'react-popup-alert';
 import 'react-popup-alert/dist/index.css'
+
 
 const server = 'http://localhost:8080'
 
@@ -20,6 +15,13 @@ const server = 'http://localhost:8080'
 const Dashboard = () => {
     const [ultimaLeitura,setUltimaLeitura] = useState(null);
     const [temperaturas, setTemperaturas] = useState([]);
+    const [limitCO2,setLimitCO2] = useState(null);
+    const [limitRuido,setLimitRuido] = useState(null);
+    const [limitLuminosidade,setLimitLuminosidade] = useState(null);
+    const [limitTemperatura,setLimitTemperatura] = useState(null);
+    const [limitCOVT,setLimitCOVT] = useState(null);
+    const [limitUmidade,setLimitUmidade] = useState(null);
+
 
     const [alert, setAlert] = React.useState({
         type: 'error',
@@ -46,6 +48,28 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     useEffect(()=>{
+        async function fetchParameters(){
+            const response = await fetch(`${server}/parameter`, 
+            {
+                method: "GET",
+                headers: {            
+                    accept: "application/json",
+                    "content-type": "application/json"            
+                }
+            })
+            const [body] = await response.json()
+            setLimitCO2(body.limitCo2)
+            setLimitRuido(body.limitRuidoSonoro)
+            setLimitLuminosidade(body.limitLuminosidade)
+            setLimitTemperatura(body.limitTemperatura)                
+            setLimitCOVT(body.limitCOVT)
+            setLimitUmidade(body.limitUmidade)
+        }
+
+        fetchParameters()
+    },[])
+
+    useEffect(()=>{
         async function fetchTemperatura(){
         const response = await fetch(`${server}/chart`, 
             {
@@ -60,7 +84,7 @@ const Dashboard = () => {
             const temp= res.map(data =>{
                 return data.temperatura 
             })
-            console.log(temp)
+            // console.log(temp)
             setTemperaturas([{
                 name: "Temperatura",
                 data : temp
@@ -71,7 +95,7 @@ const Dashboard = () => {
             fetchTemperatura();
         },30000)
         return () => {
-            console.log("fetchfetchTemperatura")
+            // console.log("fetchfetchTemperatura")
             clearInterval(fetchfetchTemperatura)
         }
     },[])
@@ -88,7 +112,7 @@ const Dashboard = () => {
             fetchUltimasLeituras()
         },20000)
         return () => {
-            console.log("fetchUltimasLeiturasInterval")
+            // console.log("fetchUltimasLeiturasInterval")
             clearInterval(fetchUltimasLeiturasInterval)
         }
     },[])
@@ -98,7 +122,7 @@ const Dashboard = () => {
             fetchAlert()
         },10000)
         return () => {
-            console.log("fetchAlertInterval")
+            // console.log("fetchAlertInterval")
             clearInterval(fetchAlertInterval)
         }
     },[])
@@ -117,49 +141,27 @@ const Dashboard = () => {
             const body = await response.json();
             
             var message = []
-            if(body.some(element => element.co2 > 400) )
-                message.push(`CO2 acima do limite`)
-            if(body.some(element => element.luminosidade > 20) )
-                message.push(`Luminosidade acima do limite`)
-            if(body.some(element => element.ruido > 20) )
-                message.push(`Ruído acima do limite`)
-            if(body.some(element => element.temperatura > 20) )
-                message.push(`Temperatura acima do limite`)
-            if(body.some(element => element.tvoc > 1) )
-                message.push(`TVOC acima do limite`)
-            if(body.some(element => element.umidade > 20) )
-                message.push(`        Umidade acima do limite`)
-            onShowAlert('error', message.join(' '))
-            setTimeout(()=>{
-                onCloseAlert()
-            },3000)
-
             //alterar para .every na versão final
-            // if(body.some(element => element.co2 > 200) ){
-                
-            //     onShowAlert('error', 'NÍVEL CO2 ACIMA DO LIMITE')
-            //     setTimeout(()=>{
-            //         onCloseAlert()
-            //     },3000)
-            // }
-
-            // if(body.some(element => element.temperatura > 20) ){
-                
-            //     onShowAlert('error','TEMPERATURA ACIMA DO LIMITE')
-            //     setTimeout(()=>{
-            //         onCloseAlert()
-            //     },4000)
-            // }
-
-            // if(body.some(element => element.luminosidade > 0) ){
-                
-            //     onShowAlert('error','LUMINOSIDADE ACIMA DO LIMITE')
-            //     setTimeout(()=>{
-            //         onCloseAlert()
-            //     },2000)
-            // }
-            
-            console.log("Alert:",body)
+            if(body.some(element => element.co2 > limitCO2) && limitCO2!== null )
+                console.log(limitCO2)
+                message.push(`CO2 acima do limite`)
+            if(body.some(element => element.luminosidade > limitLuminosidade) && limitLuminosidade!== null )
+                message.push(`Luminosidade acima do limite`)
+            if(body.some(element => element.ruido > limitRuido) && limitRuido!== null )
+                message.push(`Ruído acima do limite`)
+            if(body.some(element => element.temperatura > limitTemperatura) && limitTemperatura!== null )
+                message.push(`Temperatura acima do limite`)
+            if(body.some(element => element.tvoc > limitCOVT) && limitCOVT!== null)
+                message.push(`TVOC acima do limite`)
+            if(body.some(element => element.umidade > limitUmidade) && limitUmidade!== null )
+                message.push(` Umidade acima do limite`)
+            if(message.length !== 0){       
+                console.log(message)         
+                onShowAlert('error', message.join(' '))
+                setTimeout(()=>{
+                    onCloseAlert()
+                },3000)
+            }
         }
         catch(e)
         {
@@ -187,16 +189,12 @@ const Dashboard = () => {
 
             const [body] = await response.json();
             
-            console.log(body)
+            // console.log(body)
             setUltimaLeitura(body)
-
-
-
-
         }
         catch(e)
         {
-            console.log(e)
+            // console.log(e)
             setUltimaLeitura(null)
         }
 
@@ -223,17 +221,16 @@ const Dashboard = () => {
         },
  
     })
-    const[temperatura, setTemperatura] = useState([{        
-        name: "Temperatura",
-        data: [100,40,45,50,49]        
-    }])  
 
+    async function Logout(){
+        localStorage.clear()
+        navigate('/')
+    }
 
    
-    
     return (
 
-    <div  > 
+        <div style={{width:'100vw',height:"100vh" }}> 
             <Alert
                 header={'ATENÇÃO'}
                 // btnText={'X'}
@@ -247,52 +244,134 @@ const Dashboard = () => {
                 headerStyles={{marginBotton: '50px', color:'red'}}
                 textStyles={{marginTop: '60px', fontSize: 30, fontWeight:"bold" }}
                 buttonStyles={{visibility:'hidden'}}
-      />
-        {/* <button onClick={() => fetchLogin()}> Teste Login </button>       
-        <button onClick={() => fetchInfoAmbientes()}>Teste Info Ambiente</button>   */}
-        <div  className="app" >
-            <div className="row"  style={{  justifyContent: 'center', marginTop: 50 }}>        
+            />
+            {/* <button onClick={() => fetchLogin()}> Teste Login </button>       
+            <button onClick={() => fetchInfoAmbientes()}>Teste Info Ambiente</button>   */}
+            
+            <Grid container>
 
-        
-                <Grid  container spacing={{ xs: 12, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    <Grid item xs={12} sm={4} md={4} >
-                        <AppWidgetSummary title="CO2" total={ultimaLeitura === null? "..." : ultimaLeitura.co2} theme="temp_1" icon={'mdi:molecule-co2'} />
-                    </Grid>
-                    <Grid item xs={2} sm={4} md={4} >
-                        <AppWidgetSummary title="Ruído Sonoro" total={ultimaLeitura === null? "..." : ultimaLeitura.db} theme="temp_1" icon={'charm:sound-down'} />
-                    </Grid>                    
-                    <Grid item xs={2} sm={4} md={4} >
-                        <AppWidgetSummary title="Luminosidade" total={ultimaLeitura === null? "..." : ultimaLeitura.lux} theme="temp_1" icon={'carbon:light'} />
-                    </Grid>
-                    <Grid item xs={2} sm={4} md={4} >
-                        <AppWidgetSummary title="Temperatura" total={ultimaLeitura === null? "..." : ultimaLeitura.temperatura} theme="temp_1" icon={'fa6-solid:temperature-half'} />
-                    </Grid>
-                    <Grid item xs={2} sm={4} md={4} >
-                        <AppWidgetSummary title="Compostos Orgânicos Voláteis Totais" total={ultimaLeitura === null? "..." : ultimaLeitura.tvoc} theme="temp_1" icon={'mdi:chemical-weapon'} />
-                    </Grid>
-                    <Grid item xs={2} sm={4} md={4} >
-                        <AppWidgetSummary title="Umidade" total={ultimaLeitura === null? "..." : ultimaLeitura.umidade} theme="temp_1" icon={'carbon:humidity-alt'} />
-                    </Grid>
+                <Grid   classname="side-bar" 
+                    xs={1}
+                    style={{    textAlign:"center",
+                                padding:'10px',
+                                background:"rgb(208, 242, 255)",
+                                height:"100vh",
+                            }}  
+                    >
+                    <Grid   container
+                            direction="column"
+                            justifyContent="space-between"
+                            style={{height:"100%"}} >
+                        <Grid  style={{ background:''}}>
+                            <Button style={{ width:'70%',marginBottom:'5px'}} href='/dashboard'>
+                                <p style={{color:'black', fontWeight:'bold', fontSize: '12px'}}>Home</p>       
+                            </Button >
+                            <Button style={{ width:'70%',marginBottom:'5px'}} href='/dashboard'>
+                                <p style={{ color:'black', fontWeight:'bold', fontSize: '12px'}}>Reports</p>       
+                            </Button >
+                            <Button style={{ width:'70%',marginBottom:'5px'}} href='/parameters'>
+                                <p style={{color:'black', fontWeight:'bold', fontSize: '12px'}}>Parameters</p>       
+                            </Button >
+                        </Grid>
+                        <Grid  style={{ justifyContent:"flex-end"}}>
+                            <Button style={{ width:'70%',marginBottom:'5px'}} onClick={()=> Logout()}>
+                                <p style={{color:'black', fontWeight:'bold'}}>Logout</p>       
+                            </Button >
+                        </Grid>
                 </Grid>
 
-      
+                </Grid>                
+                
+                <Grid   classname="main-dashboad" 
+                        style={{  textAlign:"center",height:"100vh", padding:'50px'}} 
+                        xs={11}>
+                    <Grid container spacing={2} columns={13} >
 
-                <div className="is-centered">
-                    <Chart
-                        options={options}
-                        series={temperaturas}
-                        type="line"
-                        width="500"
-                    />
-                </div>
+                        <Grid xs={4} style={{background:"", width:'100%',height:"100%",margin:'.2%' }}>
+                            <AppWidgetSummary title="CO2" total={ultimaLeitura === null? "..." : ultimaLeitura.co2} theme="temp_1" icon={'mdi:molecule-co2'} />
+                        </Grid>
+
+                        <Grid xs={4} style={{background:"", width:'100%',height:"100%",margin:'.2%' }}>
+                            <AppWidgetSummary title="Ruído Sonoro" total={ultimaLeitura === null? "..." : ultimaLeitura.db} theme="temp_1" icon={'charm:sound-down'} />
+                        </Grid>
+
+                        <Grid xs={4} style={{background:"", width:'100%',height:"100%",margin:'.2%' }}>
+                            <AppWidgetSummary title="Luminosidade" total={ultimaLeitura === null? "..." : ultimaLeitura.lux} theme="temp_1" icon={'carbon:light'} />
+                        </Grid>
+
+                        <Grid xs={4} style={{background:"", width:'100%',height:"100%",margin:'.2%' }}>
+                            <AppWidgetSummary title="Temperatura" total={ultimaLeitura === null? "..." : ultimaLeitura.temperatura} theme="temp_1" icon={'fa6-solid:temperature-half'} />
+                        </Grid>
+
+                        <Grid xs={4} style={{background:"", width:'100%',height:"100%",margin:'.2%' }}>
+                            <AppWidgetSummary title="Compostos Orgânicos Voláteis Totais" total={ultimaLeitura === null? "..." : ultimaLeitura.tvoc} theme="temp_1" icon={'mdi:chemical-weapon'} />
+                        </Grid>
+
+                        <Grid xs={4} style={{background:"", width:'100%',height:"100%",margin:'.2%' }}>
+                            <AppWidgetSummary title="Umidade" total={ultimaLeitura === null? "..." : ultimaLeitura.umidade} theme="temp_1" icon={'carbon:humidity-alt'} />
+                        </Grid>
+                        <Grid xs={12} style={{background:"", width:'100%',height:"100%",justifyContent:"center"}}>
+                            <div style={{margin:'auto',borderRadius: "16px",background:"",width:"50vw",height:"40vh"}}>
+                                <Chart
+                                    options={options}
+                                    series={temperaturas}
+                                    type="line"
+                                    width="100%"
+                                    height="100%"
+                        
+                                />
+                            </div>
+                        </Grid>
+                    </Grid>
+
+                    
+                  
+
+                    {/* <Grid xs={4} >
+                        <AppWidgetSummary title="CO2" total={ultimaLeitura === null? "..." : ultimaLeitura.co2} theme="temp_1" icon={'mdi:molecule-co2'} />
+                    </Grid>
+                    <Grid  xs={4} >
+                        <AppWidgetSummary title="Ruído Sonoro" total={ultimaLeitura === null? "..." : ultimaLeitura.db} theme="temp_1" icon={'charm:sound-down'} />
+                    </Grid>                    
+                    <Grid  xs={4} >
+                        <AppWidgetSummary title="Luminosidade" total={ultimaLeitura === null? "..." : ultimaLeitura.lux} theme="temp_1" icon={'carbon:light'} />
+                    </Grid> */}
+                    {/* <Grid  xs={2} sm={4} md={4} >
+                        <AppWidgetSummary title="Temperatura" total={ultimaLeitura === null? "..." : ultimaLeitura.temperatura} theme="temp_1" icon={'fa6-solid:temperature-half'} />
+                    </Grid>
+                    <Grid  xs={2} sm={4} md={4} >
+                        <AppWidgetSummary title="Compostos Orgânicos Voláteis Totais" total={ultimaLeitura === null? "..." : ultimaLeitura.tvoc} theme="temp_1" icon={'mdi:chemical-weapon'} />
+                    </Grid>
+                    <Grid  xs={2} sm={4} md={4} >
+                        <AppWidgetSummary title="Umidade" total={ultimaLeitura === null? "..." : ultimaLeitura.umidade} theme="temp_1" icon={'carbon:humidity-alt'} />
+                    </Grid> */}
+                </Grid>
+            </Grid>
+            <div  style={{ justifyContent:'center',background:'blue'}}>
+                
+               
+                {/* <Grid  container spacing={{ xs: 12, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    
+                </Grid> */}
+
+
+                {/* <Chart
+                options={options}
+                series={temperaturas}
+                type="line"
+                width="100%"
+            /> */}
+                
+        
+                
                 
             {/* <button onClick={() => toast.error("Error Notification !", {
         position: toast.POSITION.TOP_LEFT
-      })}>Atualizar</button> */}
+    })}>Atualizar</button> */}
 
             </div>
         </div>
-    </div>);
+    );
     
 }
 

@@ -73,10 +73,6 @@ export async function Login (req, res) {
                 id: userId
             }
         });
-        // res.cookie('refreshToken', refreshToken,{
-        //     httpOnly: true,
-        //     maxAge: 24 * 60 * 60 * 1000
-        // });
         res.json({ accessToken });              
 
     }catch (error){
