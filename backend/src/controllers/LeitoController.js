@@ -1,6 +1,6 @@
 import { Leito } from '../models/LeitoModel.js';
 
-export async function GetLeitos (req, res) {
+export async function getLeitos (req, res) {
     try {
         const amostragens = await Leito.findAll()
         res.json(amostragens)
@@ -9,7 +9,7 @@ export async function GetLeitos (req, res) {
     }
 }
 
-export async function CadastrarLeito (req,res) {
+export async function cadastrarLeito (req,res) {
     const { idLeito, idAirPure, idAlerta } = req.body;
     
     try {
@@ -27,7 +27,7 @@ export async function CadastrarLeito (req,res) {
     }
 }
 
-export async function ApagarLeito (req,res) {
+export async function apagarLeito (req,res) {
     const { idLeito } = req.body;
     
     try {
@@ -45,7 +45,7 @@ export async function ApagarLeito (req,res) {
     }
 }
 
-export async function AtualizarLeito (req,res) {
+export async function atualizarLeito (req,res) {
     const { idLeito, idAirPure, idAlerta } = req.body;
     
     try {

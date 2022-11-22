@@ -7,10 +7,10 @@ import { GetUsers, Register, Login, Logout } from "./controllers/UsuarioControll
 import { verifyToken } from "./middleware/VerifyToken.js";
 import { refreshToken } from "./controllers/RefreshToken.js";
 import { getParametros ,atualizarParametros, cadastrarParametros, apagarParametros} from './controllers/ParametrosController.js'
-//import { GetAirPures } from './controllers/AirPureController.js';
+import { getAirPures } from './controllers/AirPureController.js';
 //import Chart from './controllers/chart.js'
 //import Alert from './controllers/Alert.js'
-import { GetLeitos, ApagarLeito, AtualizarLeito, CadastrarLeito } from './controllers/LeitoController.js';
+import { getLeitos, apagarLeito, atualizarLeito, cadastrarLeito } from './controllers/LeitoController.js';
 
 
 dotenv.config();
@@ -34,11 +34,11 @@ app.get('/ultimoAmbientes/:id', GetUltimoAmbientes)
 
 //rotas NeoNatAir
 //app.get('/api/amostragens', GetAmostragens);
-//app.get('/api/airpures', GetAirPures);
-app.post('/api/leitos', CadastrarLeito);
-app.get('/api/leitos', GetLeitos);
-app.delete('/api/leitos', ApagarLeito);
-app.put('/api/leitos', AtualizarLeito);
+app.get('/api/airpures', getAirPures);
+app.post('/api/leitos', cadastrarLeito);
+app.get('/api/leitos', getLeitos);
+app.delete('/api/leitos', apagarLeito);
+app.put('/api/leitos', atualizarLeito);
 
 app.get('/users', verifyToken, GetUsers);
 app.post('/login', Login);
