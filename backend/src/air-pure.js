@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { Amostragem } from "./models/amostragemModel.js";
+//import { Amostragem } from "./models/amostragemModel.js";
 import 'dotenv/config';
 
 const serverURL = 'https://backend-api-airpure.vercel.app'
@@ -98,7 +98,7 @@ export async function GetUltimaLeitura(req,res){
             accept : "application/json",
         },
     })
-    const body = await airPureResponse.json()
+/*    const body = await airPureResponse.json()
     await Amostragem.create({
         idAmbiente: 1,
         data: body[0]?.datamedicao,
@@ -108,7 +108,7 @@ export async function GetUltimaLeitura(req,res){
         umidade: body[0]?.umidade,
         luminosidade: body[0]?.lux,
         ruido: body[0]?.db
-    })
+    })*/
 
 
     res.status(airPureResponse.status)

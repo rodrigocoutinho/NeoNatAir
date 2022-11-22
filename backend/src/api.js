@@ -2,20 +2,15 @@ import express from 'express'
 import cors from 'cors'
 import { LoginAirPure, GetInfoAmbientes, GetLeiturasDia, GetUltimaLeitura, GetUltimoAmbientes  } from './air-pure.js'
 import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
-//import router from "./routes/index.js";
-import { GetAmostragens } from './routes/amostragem.js'
 import { conexao } from './config/db.js'
-import { GetAirPures } from './routes/airpure.js'
-import { GetLeitos } from './routes/leito.js'
-//import { GetUsers } from './routes/usuario.js'
 import { GetUsers, Register, Login, Logout } from "./controllers/UsuarioController.js";
 import { verifyToken } from "./middleware/VerifyToken.js";
 import { refreshToken } from "./controllers/RefreshToken.js";
 import { getParametros ,atualizarParametros, cadastrarParametros, apagarParametros} from './controllers/ParametrosController.js'
-import Chart from './controllers/chart.js'
-import Alert from './controllers/Alert.js'
-import { ApagarLeito, AtualizarLeito, CadastrarLeito } from './controllers/LeitoController.js';
+//import { GetAirPures } from './controllers/AirPureController.js';
+//import Chart from './controllers/chart.js'
+//import Alert from './controllers/Alert.js'
+import { GetLeitos, ApagarLeito, AtualizarLeito, CadastrarLeito } from './controllers/LeitoController.js';
 
 
 dotenv.config();
@@ -38,9 +33,9 @@ app.get('/ultimaLeitura', GetUltimaLeitura)
 app.get('/ultimoAmbientes/:id', GetUltimoAmbientes)
 
 //rotas NeoNatAir
-app.get('/api/amostragens', GetAmostragens);
-app.get('/api/airpures', GetAirPures);
-app.get('/api/leitos', CadastrarLeito);
+//app.get('/api/amostragens', GetAmostragens);
+//app.get('/api/airpures', GetAirPures);
+app.post('/api/leitos', CadastrarLeito);
 app.get('/api/leitos', GetLeitos);
 app.delete('/api/leitos', ApagarLeito);
 app.put('/api/leitos', AtualizarLeito);
@@ -50,14 +45,14 @@ app.post('/login', Login);
 app.post('/register', Register);
 app.get('/token', refreshToken);
 app.delete('/logout', Logout);
-app.get('/chart', Chart);
-app.get('/alert', Alert);
+//app.get('/chart', Chart);
+//app.get('/alert', Alert);
 
 //Parametros
-app.delete('/parametro', apagarParametros);
-app.get('/parametro', getParametros);
-app.put('/parametro', atualizarParametros);
-app.post('/parametro', cadastrarParametros);
+app.delete('/api/parametro', apagarParametros);
+app.get('/api/parametro', getParametros);
+app.put('/api/parametro', atualizarParametros);
+app.post('/api/parametro', cadastrarParametros);
 
 
 

@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import { conexao } from "../config/db.js";
-import { Usuario } from "./UsuarioModel.js";
+//import { Usuario } from "./UsuarioModel.js";
 
 //Define a tabela de usuários e suas colunas, conforme documentação do sequelize
 
@@ -42,7 +42,7 @@ export const AirPure = conexao.define('airpure', {
     }
 });
 
-AirPure.belongsTo(Usuario);
+//AirPure.belongsTo(Usuario);
 
 //Cria tabela
 AirPure.sync();
