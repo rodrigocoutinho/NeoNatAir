@@ -10,13 +10,13 @@ export async function getLeitos (req, res) {
 }
 
 export async function cadastrarLeito (req,res) {
-    const { idAirPure, idAlerta } = req.body;
+    const { idAirPure, idParametro } = req.body;
     
     try {
         
         await Leito.create({
             idAirPure: idAirPure,
-            idAlerta: idAlerta
+            idParametro: idParametro
         });
         res.json({msg: "Leito criado com sucesso!"});
     } catch (error){
@@ -45,11 +45,11 @@ export async function apagarLeito (req,res) {
 }
 
 export async function atualizarLeito (req,res) {
-    const { idLeito, idAirPure, idAlerta } = req.body;
+    const { idLeito, idAirPure, idParametro } = req.body;
     
     try {
         
-        await Leito.update({ idAirPure: idAirPure, idAlerta: idAlerta },{
+        await Leito.update({ idAirPure: idAirPure, idParametro: idParametro },{
             where: {
                 idLeito: idLeito
               }

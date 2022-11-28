@@ -35,10 +35,10 @@ app.get('/ultimoAmbientes/:id', GetUltimoAmbientes)
 //rotas NeoNatAir
 //app.get('/api/amostragens', GetAmostragens);
 app.get('/api/airpures', getAirPures);
-app.post('/api/leitos', cadastrarLeito);
+app.post('/api/leito', cadastrarLeito);
 app.get('/api/leitos', getLeitos);
-app.delete('/api/leitos', apagarLeito);
-app.put('/api/leitos', atualizarLeito);
+app.delete('/api/leito', apagarLeito);
+app.put('/api/leito:id', atualizarLeito);
 
 app.get('/users', verifyToken, GetUsers);
 app.post('/login', Login);
@@ -50,8 +50,8 @@ app.delete('/logout', Logout);
 
 //Parametros
 app.delete('/api/parametro', apagarParametros);
-app.get('/api/parametro', getParametros);
-app.put('/api/parametro', atualizarParametros);
+app.get('/api/parametro/', getParametros);
+app.put('/api/parametro/:id', atualizarParametros);
 app.post('/api/parametro', cadastrarParametros);
 
 
