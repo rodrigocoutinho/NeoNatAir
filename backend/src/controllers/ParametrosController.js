@@ -9,15 +9,20 @@ export async function getParametros(req,res){
 }
 
 export async function atualizarParametros(req,res){
-    const {id, idAirPure, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade}= req.body
-    console.log(body)
+    const {idParametro, idAirPure, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade}= req.body
     const response = await Parametros.update(
         {
-            ...body            
+            idAirPure: idAirPure,
+            limitCo2: limitCo2,
+            limitRuidoSonoro: limitRuidoSonoro,
+            limitLuminosidade: limitLuminosidade,
+            limitTemperatura: limitTemperatura,
+            limitCOVT: limitCOVT,
+            limitUmidade: limitUmidade             
         },
         {
             where:{
-                id:id
+                idParametro: idParametro
             }
         })
     console.log(response)
@@ -26,7 +31,7 @@ export async function atualizarParametros(req,res){
 
 export async function cadastrarParametros(req,res){
     const {idAirPure, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade}= req.body
-    console.log(body)
+
     const response = await Parametros.create(
         {
             idAirPure: idAirPure,
@@ -43,12 +48,11 @@ export async function cadastrarParametros(req,res){
 }
 
 export async function apagarParametros(req,res){
-    const { id }= req.body
-    console.log(body)
+    const { idParametro }= req.body
     const response = await Parametros.destroy(
         {
             where:{
-                id:id
+                idParametro:idParametro
             }
         })
     console.log(response)
