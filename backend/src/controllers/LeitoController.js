@@ -10,12 +10,11 @@ export async function getLeitos (req, res) {
 }
 
 export async function cadastrarLeito (req,res) {
-    const { idLeito, idAirPure, idAlerta } = req.body;
+    const { idAirPure, idAlerta } = req.body;
     
     try {
         
         await Leito.create({
-            idLeito: idLeito,
             idAirPure: idAirPure,
             idAlerta: idAlerta
         });

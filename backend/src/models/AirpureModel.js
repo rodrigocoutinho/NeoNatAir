@@ -42,7 +42,7 @@ export const AirPure = conexao.define('airpure', {
     }
 });
 
-//AirPure.belongsTo(Usuario);
+//AirPure.belongsTo(Leito);
 
 //Cria tabela
 AirPure.sync();

@@ -5,10 +5,12 @@ import { AirPure } from "./AirPureModel.js";
 
 //Define a tabela de usuários e suas colunas, conforme documentação do sequelize
 
-export const Parametros = conexao.define('alerta', {
-    idAirPure: {
+export const Parametros = conexao.define('parametro', {
+    idParametro:{
         type: Sequelize.INTEGER,
-        defaultValue: null
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
     },
     limitCo2: {
         type: Sequelize.INTEGER,
@@ -43,7 +45,10 @@ export const Parametros = conexao.define('alerta', {
    
 });
 
-Parametros.belongsTo(AirPure);
+Parametros.belongsTo(AirPure, {
+    constraints: true,
+    foreignKey: 'idAirPure'
+});
 
 //Cria tabela
 Parametros.sync();
