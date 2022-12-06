@@ -5,6 +5,12 @@ export async function getAirPures(req,res){
     console.log(response)
     res.json(response)
 };
+
+export async function getAirPure(req,res){
+    const response = await AirPure.findByPk(req.params.id)
+    console.log(response)
+    res.json(response)
+};
 export async function cadastrarAirPure(req,res){
     const { data, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
     

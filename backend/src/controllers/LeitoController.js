@@ -9,6 +9,15 @@ export async function getLeitos (req, res) {
     }
 }
 
+export async function getLeito (req, res) {
+    try {
+        const amostragens = await Leito.findByPk(req.params.id)
+        res.json(amostragens)
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export async function cadastrarLeito (req,res) {
     const { idAirPure, idParametro } = req.body;
     
@@ -27,13 +36,12 @@ export async function cadastrarLeito (req,res) {
 }
 
 export async function apagarLeito (req,res) {
-    const { idLeito } = req.body;
-    
+
     try {
         
         await Leito.destroy({
             where: {
-                idLeito: idLeito
+                idLeito: req.params.id
               }
         });
         res.json({msg: "Leito excluido com sucesso!"});

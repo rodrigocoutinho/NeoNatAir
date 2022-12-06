@@ -8,6 +8,13 @@ export async function getParametros(req,res){
     res.json(response)
 }
 
+export async function getParametro(req,res){
+
+    const response = await Parametros.findByPk(req.params.id)
+    console.log(response)
+    res.json(response)
+}
+
 export async function atualizarParametros(req,res){
     const {idParametro, idAirPure, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade}= req.body
     const response = await Parametros.update(

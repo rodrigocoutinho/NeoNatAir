@@ -6,11 +6,12 @@ import { conexao } from './config/db.js'
 import { GetUsers, Register, Login, Logout } from "./controllers/UsuarioController.js";
 import { verifyToken } from "./middleware/VerifyToken.js";
 import { refreshToken } from "./controllers/RefreshToken.js";
-import { getParametros ,atualizarParametros, cadastrarParametros, apagarParametros} from './controllers/ParametrosController.js'
-import { getAirPures, cadastrarAirPure } from './controllers/AirPureController.js';
+import { getParametros, getParametro, atualizarParametros, cadastrarParametros, apagarParametros} from './controllers/ParametrosController.js'
+import { getAirPures, getAirPure, cadastrarAirPure } from './controllers/AirPureController.js';
 //import Chart from './controllers/chart.js'
 //import Alert from './controllers/Alert.js'
-import { getLeitos, apagarLeito, atualizarLeito, cadastrarLeito } from './controllers/LeitoController.js';
+import { getLeitos, getLeito, apagarLeito, atualizarLeito, cadastrarLeito } from './controllers/LeitoController.js';
+import { cadastrarAlerta, getAlerta, getAlertas, apagarAlerta } from './controllers/AlertaController.js';
 
 
 dotenv.config();
@@ -35,11 +36,14 @@ app.get('/ultimoAmbientes/:id', GetUltimoAmbientes)
 //rotas NeoNatAir
 //app.get('/api/amostragens', GetAmostragens);
 app.get('/api/airpures', getAirPures);
+app.get('/api/airpure/:id', getAirPure)
 app.post('/api/airpure', cadastrarAirPure);
 
+//Leito
 app.post('/api/leito', cadastrarLeito);
 app.get('/api/leitos', getLeitos);
-app.delete('/api/leito', apagarLeito);
+app.get('/api/leito/:id', getLeito);
+app.delete('/api/leito/:id', apagarLeito);
 app.put('/api/leito:id', atualizarLeito);
 
 app.get('/users', verifyToken, GetUsers);
@@ -51,10 +55,17 @@ app.delete('/logout', Logout);
 //app.get('/alert', Alert);
 
 //Parametros
-app.delete('/api/parametro', apagarParametros);
-app.get('/api/parametro', getParametros);
+app.get('/api/parametro/:id', getParametro);
+app.get('/api/parametros', getParametros);
 app.put('/api/parametro', atualizarParametros);
 app.post('/api/parametro', cadastrarParametros);
+app.delete('/api/parametro', apagarParametros);
+
+//Alerta
+app.get('/api/alerta/:id', getAlerta);
+app.get('/api/alertas', getAlertas);
+app.post('/api/alerta', cadastrarAlerta);
+app.delete('/api/alerta', apagarAlerta);
 
 
 
