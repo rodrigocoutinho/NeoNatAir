@@ -7,7 +7,7 @@ import { GetUsers, Register, Login, Logout } from "./controllers/UsuarioControll
 import { verifyToken } from "./middleware/VerifyToken.js";
 import { refreshToken } from "./controllers/RefreshToken.js";
 import { getParametros, getParametro, atualizarParametros, cadastrarParametros, apagarParametros} from './controllers/ParametrosController.js'
-import { getAirPures, getAirPure, cadastrarAirPure } from './controllers/AirPureController.js';
+import { getAirPures, getAirPure, cadastrarAirPure, apagarAirPure } from './controllers/AirPureController.js';
 //import Chart from './controllers/chart.js'
 //import Alert from './controllers/Alert.js'
 import { getLeitos, getLeito, apagarLeito, atualizarLeito, cadastrarLeito } from './controllers/LeitoController.js';
@@ -38,6 +38,7 @@ app.get('/ultimoAmbientes/:id', GetUltimoAmbientes)
 app.get('/api/airpures', getAirPures);
 app.get('/api/airpure/:id', getAirPure)
 app.post('/api/airpure', cadastrarAirPure);
+app.delete('/api/airpure/:id', apagarAirPure);
 
 //Leito
 app.post('/api/leito', cadastrarLeito);

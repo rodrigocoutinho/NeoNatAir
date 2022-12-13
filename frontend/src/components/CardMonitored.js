@@ -98,8 +98,8 @@ const CardMonitored = ({data,handleDelete})=>{
                 </Menu>
               </>
                 }
-                title={data.sala}
-                subheader={data.dtformatada}
+                title={data.id}
+                subheader={data.data}
             />
             <CardMedia
                 

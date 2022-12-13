@@ -33,3 +33,14 @@ export async function cadastrarAirPure(req,res){
         console.log(error);
     }
 };
+
+export async function apagarAirPure(req,res){
+    const response = await AirPure.destroy(
+        {
+            where:{
+                id: req.params.id
+            }
+        })
+    console.log(response)
+    res.json(response)
+};

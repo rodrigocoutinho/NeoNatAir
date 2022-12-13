@@ -22,8 +22,8 @@ const MonitoredEnvironmente = () => {
     
     const getAmbientes = async()=>{
       setLoading(true); 
-      var sessionToken =  await getToken();  
-      let response = await axios.get(`https://backend-api-floats.vercel.app/api/ambientes/4`, { headers: { sessionToken: sessionToken }})
+      //var sessionToken =  await getToken();  
+      let response = await axios.get(`http://localhost:8080/api/airpures`)
       setLoading(false); 
       return setAmbientes(response.data);
     } 
@@ -38,8 +38,12 @@ const MonitoredEnvironmente = () => {
     window.location.reload('false');
 
   }
-  const cardDelete = ()=>{
-    
+
+  const cardDelete = async(id)=>{
+    setLoading(true); 
+      //var sessionToken =  await getToken();  
+      let response = await axios.delete(`http://localhost:8080/api/airpure/${id}`)
+      return setAmbientes(response.data);
      
   }
   
