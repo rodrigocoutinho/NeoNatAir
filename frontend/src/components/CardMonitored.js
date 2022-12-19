@@ -98,8 +98,8 @@ const CardMonitored = ({data,handleDelete})=>{
                 </Menu>
               </>
                 }
-                title={data.id}
-                subheader={data.data}
+                title={data.sala}
+                subheader={data.dtformatada}
             />
             <CardMedia
                 
@@ -133,6 +133,12 @@ const CardMonitored = ({data,handleDelete})=>{
                   </Typography>
                   <Typography>
                     Temperatura: {data.temperatura}°C
+                  </Typography>
+                  <Typography>
+                    Luminosidade: {data.lux}
+                  </Typography>
+                  <Typography>
+                    Ruido: {data.db} db
                   </Typography>
                 </CardContent>
             </Collapse>

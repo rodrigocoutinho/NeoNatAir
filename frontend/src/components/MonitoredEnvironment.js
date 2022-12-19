@@ -22,8 +22,8 @@ const MonitoredEnvironmente = () => {
     
     const getAmbientes = async()=>{
       setLoading(true); 
-      //var sessionToken =  await getToken();  
-      let response = await axios.get(`http://localhost:8080/api/airpures`)
+      var sessionToken =  await getToken();  
+      let response = await axios.get(`https://backend-api-floats.vercel.app/api/ambientes/4`, { headers: { sessionToken: sessionToken }})
       setLoading(false); 
       return setAmbientes(response.data);
     } 

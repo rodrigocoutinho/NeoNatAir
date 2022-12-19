@@ -3,9 +3,8 @@ import cors from 'cors'
 import { LoginAirPure, GetInfoAmbientes, GetLeiturasDia, GetUltimaLeitura, GetUltimoAmbientes  } from './air-pure.js'
 import dotenv from "dotenv";
 import { conexao } from './config/db.js'
-import { GetUsers, Register, Login, Logout } from "./controllers/UsuarioController.js";
-import { verifyToken } from "./middleware/VerifyToken.js";
-import { refreshToken } from "./controllers/RefreshToken.js";
+
+
 import { getParametros, getParametro, atualizarParametros, cadastrarParametros, apagarParametros} from './controllers/ParametrosController.js'
 import { getAirPures, getAirPure, cadastrarAirPure, apagarAirPure } from './controllers/AirPureController.js';
 //import Chart from './controllers/chart.js'
@@ -47,11 +46,11 @@ app.get('/api/leito/:id', getLeito);
 app.delete('/api/leito/:id', apagarLeito);
 app.put('/api/leito:id', atualizarLeito);
 
-app.get('/users', verifyToken, GetUsers);
-app.post('/login', Login);
-app.post('/register', Register);
-app.get('/token', refreshToken);
-app.delete('/logout', Logout);
+//app.get('/users', verifyToken, GetUsers);
+//app.post('/login', Login);
+//app.post('/register', Register);
+//app.get('/token', refreshToken);
+//app.delete('/logout', Logout);
 //app.get('/chart', Chart);
 //app.get('/alert', Alert);
 
