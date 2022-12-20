@@ -1,8 +1,5 @@
 import { Sequelize } from "sequelize";
 import { conexao } from "../config/db.js";
-import { AirPure } from "./AirPureModel.js";
-import { Parametros } from "./ParametrosModel.js";
-
 //Define a tabela de usuários e suas colunas, conforme documentação do sequelize
 
 export const Leito = conexao.define('leito', {
@@ -11,19 +8,41 @@ export const Leito = conexao.define('leito', {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
+    },
+    nome: {
+        type: Sequelize.STRING
+    },
+    limitCo2: {
+        type: Sequelize.INTEGER,
+        defaultValue: null
+    },
+    limitRuidoSonoro: {
+        type: Sequelize.INTEGER,
+        defaultValue: null
+
+    },
+    limitLuminosidade: {
+        type: Sequelize.INTEGER,
+        defaultValue: null
+
+    },
+    limitTemperatura: {
+        type: Sequelize.INTEGER,
+        defaultValue: null
+
+    },
+    limitCOVT: {
+        type: Sequelize.INTEGER,
+        defaultValue: null
+        
+
+    },
+    limitUmidade: {
+        type: Sequelize.INTEGER,
+        defaultValue: null
+
     }
 
-});
-// Referenciar airpure e parametros
-
-Leito.belongsTo(AirPure, {
-    foreignKey:'idAirPure',
-    allowNull: false
-});
-Leito.belongsTo(Parametros, {
-    foreignKey:'idParametro',
-    constraints: true,
-    allowNull: false
 });
 
 //Cria tabela
