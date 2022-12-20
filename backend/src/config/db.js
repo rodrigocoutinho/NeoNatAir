@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 export const conexao = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     host: process.env.DB_HOST,
-    dialect: 'postgres'
+    dialect: 'mysql'
 })
 
 conexao.authenticate().then(() => {

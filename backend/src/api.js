@@ -3,16 +3,8 @@ import cors from 'cors'
 import { LoginAirPure, GetInfoAmbientes, GetLeiturasDia, GetUltimaLeitura, GetUltimoAmbientes  } from './air-pure.js'
 import dotenv from "dotenv";
 import { conexao } from './config/db.js'
-<<<<<<< HEAD
-
-
-import { getParametros, getParametro, atualizarParametros, cadastrarParametros, apagarParametros} from './controllers/ParametrosController.js'
-import { getAirPures, getAirPure, cadastrarAirPure, apagarAirPure } from './controllers/AirPureController.js';
-=======
-import { GetUsers, Register, Login, Logout } from "./controllers/UsuarioController.js";
 import { verifyToken } from "./middleware/VerifyToken.js";
 import { refreshToken } from "./controllers/RefreshToken.js";
->>>>>>> alteracoes-estrutura
 //import Chart from './controllers/chart.js'
 //import Alert from './controllers/Alert.js'
 import { getLeitos, getLeito, apagarLeito, atualizarLeito, cadastrarLeito } from './controllers/LeitoController.js';
