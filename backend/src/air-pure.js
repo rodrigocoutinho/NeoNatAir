@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 //import { Amostragem } from "./models/amostragemModel.js";
 import 'dotenv/config';
 
-const serverURL = 'https://backend-api-airpure.vercel.app'
+const serverURL = 'https://backend-api-floats.vercel.app'
 
 let TOKEN = null
 
@@ -23,12 +23,14 @@ export async function LoginAirPure(req,res){
         body: loginBody
     })
     
-    //res.status(airPureResponse.status)
+    res.status(airPureResponse.status)
+
+    //console.log(airPureResponse)
 
     let body = await airPureResponse.json()
     //res.json(body)
     TOKEN = body.session_token
-
+    res.json(body)
    // return TOKEN
     //console.log(TOKEN)
 }
