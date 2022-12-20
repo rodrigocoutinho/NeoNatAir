@@ -1,4 +1,4 @@
-import { Usuario } from "../models/usuarioModel.js";
+import { Usuario } from "../models/UsuarioModel.js";
 import jwt from "jsonwebtoken";
 
 export async function refreshToken (req, res) {
