@@ -9,11 +9,11 @@ import Paper from '@mui/material/Paper';
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {createParametros} from '../services/service';
+import createParametros from '../services/service';
 import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 
-const CreateEnvironment = () =>{
+const CreateLeitos = () =>{
     const { register, handleSubmit } = useForm();
     const [ambientes, setAmbientes] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -81,10 +81,10 @@ const CreateEnvironment = () =>{
         <Container maxWidth="sm" sx={{textAlign: 'center'}}>
             <Paper sx={{width: '600px'}}>
             <Typography variant="h4" component="div" sx={{ paddingTop: 2}}>
-               Define parâmetros
+               Criar leito para monitoramento
             </Typography>
             <Typography variant="body" component="div">
-                Preencha o formulário para definir os parâmetros.
+                Preencha o formulário para configurar os parâmetros de monitoramento.
             </Typography>
            
             <Box component="form" noValidate  sx={{ mt: 3, marginLeft:2, marginRight: 2 }}>
@@ -94,7 +94,7 @@ const CreateEnvironment = () =>{
                         <TextField
                             id="idAirPure"
                             select
-                            label="Selecione o ambiente"  
+                            label="Selecione o AirPure"  
                             variant="standard"
                             fullWidth
                             {...register("idAirPure",{required:'Por favor insera o nome do ambiente'})}
@@ -107,7 +107,16 @@ const CreateEnvironment = () =>{
 
                         </TextField>
                     </Grid>
+                      <Grid item xs ={12}>
+                            <TextField
+                                id="nome"
+                                variant="standard"
+                                label="Nome para o leito"
+                                fullWidth
+                                {...register("nome",{required:'Por favor insera o Nome do leito'})}
 
+                            />
+                      </Grid>  
                       <Typography variant="body" component="div" sx={{mt: 4, marginLeft: 8.75, color:'#888888'}}>
                         Define os valores limite dos sensores de monitoramento.
                       </Typography>
@@ -266,4 +275,4 @@ const CreateEnvironment = () =>{
     );
 }
 
-export default CreateEnvironment
+export default CreateLeitos

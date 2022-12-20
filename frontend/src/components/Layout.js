@@ -17,24 +17,24 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import DisplaySettingsOutlinedIcon from '@mui/icons-material/DisplaySettingsOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 const drawerWidth = 240;
 
 const Layout = ()=> {
+  
   const navigate = useNavigate();
-  const id = uuidv4();
   const menuItem = [
+
     {
-        text: 'Ambientes',
-        icon: <MonitorHeartOutlinedIcon/>,
-        path:  '/ambientes'
+      text: 'Criar Leitos',
+      icon: <DisplaySettingsOutlinedIcon/>,
+      path:  "/leitoform/"
     },
 
     {
-      text: 'Definir Parâmetros',
-      icon: <DisplaySettingsOutlinedIcon/>,
-      path:  "/parametros-form/"+id
-    },
+      text: 'Monitoramento',
+      icon: <MonitorHeartOutlinedIcon/>,
+      path:  '/monitored-leitos'
+  },
 
     {
         text: 'Relatório',

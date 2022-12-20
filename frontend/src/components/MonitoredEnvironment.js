@@ -51,10 +51,10 @@ const MonitoredEnvironmente = () => {
      <Container maxWidth="md" sx={{textAlign: 'center'}}>
         
           <Typography variant="h4" component="div" sx={{marginBottom: 1}}>
-                Ambientes Monitorados
+                Monitoramento dos Leitos
           </Typography>
           <Typography variant="body" component="div" sx={{mt: 1, marginLeft: 2, color:'#888888'}}>
-              Acompanhamento dos senssores de ambientes configurados para receber alertas.<Button variant="text" onClick={reload}>Atualizar</Button>
+              Acompanhamento dos leitos configurados para receber alertas.<Button variant="text" onClick={reload}>Atualizar</Button>
           </Typography>
 
           {loading ? 
