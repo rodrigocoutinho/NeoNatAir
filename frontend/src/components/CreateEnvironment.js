@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { createParametros } from '../services/service';
+import {createParametros} from '../services/service';
 import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 

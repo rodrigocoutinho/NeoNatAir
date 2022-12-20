@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8000/api/";
 
-export const createParametros = (idAirPure, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade) => {
+const createParametros = (idAirPure, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade) => {
   return axios.post(API_URL + "parametro", {
     idAirPure, 
     limitCo2, 
@@ -14,7 +14,7 @@ export const createParametros = (idAirPure, limitCo2, limitRuidoSonoro, limitLum
   });
 };
 
-export const createLeito = (idAirPure,idParametro  ) => {
+const createLeito = (idAirPure,idParametro  ) => {
     return axios.post(API_URL + "leito", {
       idAirPure, 
       idParametro,
@@ -32,4 +32,4 @@ export const createLeito = (idAirPure,idParametro  ) => {
     
     */
 }
-  
+  export default {createParametros, createLeito}
