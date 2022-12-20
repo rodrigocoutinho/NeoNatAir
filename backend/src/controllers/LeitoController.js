@@ -2,8 +2,8 @@ import { Leito } from '../models/LeitoModel.js';
 
 export async function getLeitos (req, res) {
     try {
-        const amostragens = await Leito.findAll()
-        res.json(amostragens)
+        const Leitos = await Leito.findAll()
+        res.json(Leitos)
     } catch (error) {
         console.error(error)
     }
@@ -19,13 +19,19 @@ export async function getLeito (req, res) {
 }
 
 export async function cadastrarLeito (req,res) {
-    const { idAirPure, idParametro } = req.body;
+    const {idAirPure, nome, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade}= req.body;
     
     try {
         
         await Leito.create({
             idAirPure: idAirPure,
-            idParametro: idParametro
+            nome: nome,
+            limitCo2: limitCo2,
+            limitRuidoSonoro: limitRuidoSonoro,
+            limitLuminosidade: limitLuminosidade,
+            limitTemperatura: limitTemperatura,
+            limitCOVT: limitCOVT,
+            limitUmidade: limitUmidade 
         });
         res.json({msg: "Leito criado com sucesso!"});
     } catch (error){
@@ -53,13 +59,21 @@ export async function apagarLeito (req,res) {
 }
 
 export async function atualizarLeito (req,res) {
-    const { idLeito, idAirPure, idParametro } = req.body;
+    const { nome, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade } = req.body;
     
     try {
         
-        await Leito.update({ idAirPure: idAirPure, idParametro: idParametro },{
+        await Leito.update({ 
+            nome: nome,
+            limitCo2: limitCo2,
+            limitRuidoSonoro: limitRuidoSonoro,
+            limitLuminosidade: limitLuminosidade,
+            limitTemperatura: limitTemperatura,
+            limitCOVT: limitCOVT,
+            limitUmidade: limitUmidade
+         },{
             where: {
-                idLeito: idLeito
+                idLeito: req.params.id
               }
         });
         res.json({msg: "Leito atualizado com sucesso!"});
