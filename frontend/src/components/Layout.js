@@ -27,7 +27,7 @@ const Layout = ()=> {
     {
       text: 'Criar Leitos',
       icon: <DisplaySettingsOutlinedIcon/>,
-      path:  "/leitoform/"
+      path:  "/leitoform"
     },
 
     {

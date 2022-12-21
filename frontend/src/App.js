@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<SignInSide/>}/>
           <Route path="/signup" element={<SignUpSide/>}/> 
           <Route path="/wellcome" element={[<Layout/>,<Wellcome/>]}/> 
-          <Route path="/leitoform/" element={[<Layout/>,<CreateLeitos/>]}/>
+          <Route path="/leitoform" element={[<Layout/>,<CreateLeitos/>]}/>
           <Route path="/monitored-leitos" element={[<Layout/>,<MonitoredEnvironmente/>]}/>
           <Route path="/report" element={[<Layout/>,<Report/>]}/>
        </Routes>

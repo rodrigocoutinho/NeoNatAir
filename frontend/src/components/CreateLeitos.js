@@ -9,17 +9,18 @@ import Paper from '@mui/material/Paper';
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import createParametros from '../services/service';
-import { useNavigate } from "react-router-dom";
-import CircularProgress from '@mui/material/CircularProgress';
+import createLeito from '../services/service';
+ 
+import Alert from '@mui/material/Alert';
 
 const CreateLeitos = () =>{
     const { register, handleSubmit } = useForm();
     const [ambientes, setAmbientes] = useState([]);
-    const [loading, setLoading] = useState(false);
+    
     const [message, setMessage] = useState("");
+    const [successful, setSuccessful] = useState(false);
 
-    const navigate = useNavigate();
+    
 
     const getToken  =  async ()=> {
         var response = await axios.post('https://backend-api-floats.vercel.app/api/login', { 'usr': 'inf', 'pass': '25d55ad283aa400af464c76d713c07ad' });
@@ -49,10 +50,10 @@ const CreateLeitos = () =>{
         console.log(JSON.stringify(data))
 
     if (JSON.stringify(data) !== {}) {
-        createParametros(data.idAirPure, data.limitCo2, data.limitRuidoSonoro, data.limitLuminosidade, data.limitTemperatura, data.limitCOVT, data.limitUmidade ).then(
+        createLeito(data.idAirPure, data.nome, data.limitCo2, data.limitRuidoSonoro, data.limitLuminosidade, data.limitTemperatura, data.limitCOVT, data.limitUmidade ).then(
           () => {
-            navigate("/");
-            window.location.reload();
+            setSuccessful(true);
+            setTimeout(() =>  window.location.reload(), 2000);
             
           },
           (error) => {
@@ -63,13 +64,12 @@ const CreateLeitos = () =>{
               error.message ||
               error.toString();
   
-            setLoading(false);
+            setSuccessful(false);
             setMessage(resMessage);
+           
           }
         );
-      } else {
-        setLoading(false);
-      }
+      } 
     };
 
 
@@ -78,8 +78,13 @@ const CreateLeitos = () =>{
 
 
     return(
+        
         <Container maxWidth="sm" sx={{textAlign: 'center'}}>
-            <Paper sx={{width: '600px'}}>
+          <Paper sx={{width: '800px'}}>
+          {
+              message ? <Alert severity="error" >{message}</Alert> : 
+               successful ?  <Alert severity="success">Leito Criado com sucesso!</Alert> : ''
+          }
             <Typography variant="h4" component="div" sx={{ paddingTop: 2}}>
                Criar leito para monitoramento
             </Typography>
@@ -87,7 +92,7 @@ const CreateLeitos = () =>{
                 Preencha o formulário para configurar os parâmetros de monitoramento.
             </Typography>
            
-            <Box component="form" noValidate  sx={{ mt: 3, marginLeft:2, marginRight: 2 }}>
+            <Box component="form" noValidate  sx={{ mt: 2, marginLeft:2, marginRight: 2 }}>
              
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -117,7 +122,7 @@ const CreateLeitos = () =>{
 
                             />
                       </Grid>  
-                      <Typography variant="body" component="div" sx={{mt: 4, marginLeft: 8.75, color:'#888888'}}>
+                      <Typography variant="body" component="div" sx={{mt: 4, marginLeft: 25, color:'#888888'}}>
                         Define os valores limite dos sensores de monitoramento.
                       </Typography>
 
@@ -267,10 +272,10 @@ const CreateLeitos = () =>{
                     sx={{ mt: 3, mb: 2 }}
                     onClick={handleSubmit(handleParametros)}
                     >
-                     {loading ? <CircularProgress/>:"Criar parâmetros"}
+                    Criar Leito
                 </Button>
             </Box>
-            </Paper>
+        </Paper>
         </Container>
     );
 }

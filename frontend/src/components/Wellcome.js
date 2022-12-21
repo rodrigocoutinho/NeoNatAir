@@ -20,7 +20,7 @@ const Wellcome = () => {
             <Typography variant="body2" gutterBottom sx={{textAlign: 'justify'}}>
               Primeiramente precisamos definir os parâmetros de alertas dos ambientes que serão monitorados.
             </Typography>
-            <Button variant="contained" sx={{marginTop:2}} onClick={()=>{navigate("/leitoform/")}}>Definir Parâmetros</Button>
+            <Button variant="contained" sx={{marginTop:2}} onClick={()=>{navigate("/leitoform")}}>Definir Parâmetros</Button>
       </Container>
     );
 }

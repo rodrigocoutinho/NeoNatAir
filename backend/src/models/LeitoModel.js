@@ -9,6 +9,11 @@ export const Leito = conexao.define('leito', {
         primaryKey: true,
         autoIncrement: true
     },
+
+    idAirPure:{
+        type: Sequelize.INTEGER
+    },
+
     nome: {
         type: Sequelize.STRING
     },
