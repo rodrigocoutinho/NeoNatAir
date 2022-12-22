@@ -9,6 +9,7 @@ import Layout from './components/Layout';
 import CreateLeitos from './components/CreateLeitos';
 import MonitoredEnvironmente from './components/MonitoredEnvironment';
 import Report from './components/Report';
+import MonitoredEnvironmentLeito from './components/MonitoredEnvironmentLeito';
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
           <Route path="/signup" element={<SignUpSide/>}/> 
           <Route path="/wellcome" element={[<Layout/>,<Wellcome/>]}/> 
           <Route path="/leitoform" element={[<Layout/>,<CreateLeitos/>]}/>
-          <Route path="/monitored-leitos" element={[<Layout/>,<MonitoredEnvironmente/>]}/>
+          <Route path="/monitored-airpures" element={[<Layout/>,<MonitoredEnvironmente/>]}/>
+          <Route path="/monitored-leitos" element={[<Layout/>,<MonitoredEnvironmentLeito/>]}/>
           <Route path="/report" element={[<Layout/>,<Report/>]}/>
        </Routes>
     </div>

@@ -31,7 +31,13 @@ const Layout = ()=> {
     },
 
     {
-      text: 'Monitoramento',
+      text: 'Airpures',
+      icon: <MonitorHeartOutlinedIcon/>,
+      path:  '/monitored-airpures'
+  },
+
+    {
+      text: 'Leitos',
       icon: <MonitorHeartOutlinedIcon/>,
       path:  '/monitored-leitos'
   },
