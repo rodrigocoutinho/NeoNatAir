@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,7 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ImgSignin from '../assets/signinImg.png';
- 
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -30,8 +32,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 const SignInSide = () => {
-  
-    const handleSubmit = (event) => {
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -40,40 +42,66 @@ const SignInSide = () => {
     });
   };
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
+  const server = 'http://localhost:8080'
+
+
+  async function Auth() {
+    const response = await axios.post(`${server}/login`, {
+      email: email,
+      password: password
+    })
+    if (response.status >= 200 && response.status <= 300) {
+      const accessToken = await response.data.accessToken;
+      //console.log(accessToken)
+      localStorage.setItem("token", accessToken)
+      navigate('/wellcome');
+    } else {
+      console.log("ERRO");
+    }
+  }
+
+  function Register() {
+    navigate('/signup');
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        
-        <Grid item xs={12} sm={8} md={6} >
-        <Box
-          sx={{
-             mt:15,
-            textAlign: 'center',
-            marginRight: 10,
-            marginLeft: 10,
-            color:'#143053'
-          }}
-        >
-          <Typography variant="h3" component="div">
-             Sistema NeoNatAir
-          </Typography>
-          <Typography variant="body1" gutterBottom sx={{textAlign: 'justify'}}>
-          A importância do monitoramento dos recém-nascidos e o ambiente de Unidade de Terapia Intensiva Neonatal,
-           a IoT pode ser utilizada para não só garantir o monitoramento constante e ininterrupto, 
-           mas também para automação de ações e, principalmente, para análise de dados, 
-           isando a identificação precoce de problemas com o ambiente, melhorando a prevenção e tratamento dos casos. Sendo assim, 
-           é necessário monitorar esse ambiente em seus diversos aspectos, 
-           como concentração de dióxido de carbono, temperatura, umidade, compostos orgânicos voláteis, nível de ruídos e 
-           intensidade da luminosidade.
 
-          </Typography>
+        <Grid item xs={12} sm={8} md={6} >
+          <Box
+            sx={{
+              mt: 15,
+              textAlign: 'center',
+              marginRight: 10,
+              marginLeft: 10,
+              color: '#143053'
+            }}
+          >
+            <Typography variant="h3" component="div">
+              Sistema NeoNatAir
+            </Typography>
+            <Typography variant="body1" gutterBottom sx={{ textAlign: 'justify' }}>
+              A importância do monitoramento dos recém-nascidos e o ambiente de Unidade de Terapia Intensiva Neonatal,
+              a IoT pode ser utilizada para não só garantir o monitoramento constante e ininterrupto,
+              mas também para automação de ações e, principalmente, para análise de dados,
+              isando a identificação precoce de problemas com o ambiente, melhorando a prevenção e tratamento dos casos. Sendo assim,
+              é necessário monitorar esse ambiente em seus diversos aspectos,
+              como concentração de dióxido de carbono, temperatura, umidade, compostos orgânicos voláteis, nível de ruídos e
+              intensidade da luminosidade.
+
+            </Typography>
             <Box>
-              <img src={ImgSignin} alt=""/>
+              <img src={ImgSignin} alt="" />
             </Box>
-        </Box>   
+          </Box>
         </Grid>
-        
+
         <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -93,16 +121,18 @@ const SignInSide = () => {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
-                variant="standard" 
+                variant="standard"
                 margin="normal"
                 required
                 fullWidth
                 id="username"
                 label="Username"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
-               variant="standard" 
+                variant="standard"
                 margin="normal"
                 required
                 fullWidth
@@ -111,6 +141,8 @@ const SignInSide = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -121,6 +153,7 @@ const SignInSide = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={() => Auth()}
               >
                 Sign In
               </Button>
@@ -131,7 +164,7 @@ const SignInSide = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2" onClick={() => Register()}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
