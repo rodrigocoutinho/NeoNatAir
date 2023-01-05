@@ -25,6 +25,19 @@ O NeoNatAir auxiliará os cuidados do ambiente UTIN através do monitoramento da
 - NodeJS
 - MySQL
 
+- Criar arquivo .env na pasta raiz backend com as credenciais
+```
+EX:
+//Credenciais Locais
+DB_HOST = "endereço do banco de dados"
+DB_USER = "usuario do banco de dados"
+DB_PASS = "senha do banco de dados"
+DB_NAME = "nome do banco de dados"
+//Credenciais AirPure
+ACESS_USER = "usuario de acesso"
+ACESS_PASS = "senha de acesso"
+```
+
 ## Instalação
 - npm install
 
