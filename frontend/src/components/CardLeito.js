@@ -83,7 +83,12 @@ const CardLeito = ({data,handleDelete, handleUpdate})=>{
                 >
                   
                   <MenuItem  onClick={handleClose} >
-                      <VisibilityOutlinedIcon sx={{mr:1}}/>
+                      <VisibilityOutlinedIcon 
+                      expand={expanded}
+                      onClick={handleExpandClick}
+                      aria-expanded={expanded}
+                      aria-label="show more"
+                      sx={{mr:1}}/>
                         Parâmetros
                   </MenuItem>
                     <MenuItem  onClick={()=>{handleUpdate(data.idLeito)}} >
@@ -107,6 +112,9 @@ const CardLeito = ({data,handleDelete, handleUpdate})=>{
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     ID Leito: {data.idLeito}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    ID AirPure: {data.idAirPure}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

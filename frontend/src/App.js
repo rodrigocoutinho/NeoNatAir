@@ -10,6 +10,7 @@ import CreateLeitos from './components/CreateLeitos';
 import MonitoredEnvironment from './components/MonitoredEnvironment';
 import UpdateLeito from './components/UpdateLeito';
 import Report from './components/Report';
+import ReportNew from './components/ReportNew';
 import MonitoredEnvironmentLeito from './components/MonitoredEnvironmentLeito';
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/monitored-leitos" element={[<Layout/>,<MonitoredEnvironmentLeito/>]}/>
           <Route path="/leito/:id" element={[<Layout/>,<UpdateLeito/>]}/>
           <Route path="/report" element={[<Layout/>,<Report/>]}/>
+          <Route path="/reportnew" element={[<Layout/>,<ReportNew/>]}/>
        </Routes>
     </div>
   );

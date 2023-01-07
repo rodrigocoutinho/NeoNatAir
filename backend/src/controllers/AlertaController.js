@@ -13,12 +13,13 @@ export async function getAlerta (req, res){
 }
 
 export async function cadastrarAlerta(req,res){
-    const { data, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
+    const { idAirPure, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
     
     try {
         
         await Alerta.create({
-            data: data,
+            idAirPure: idAirPure,
+            data: new Date(),
             temperatura: temperatura,
             co2: co2,
             tvoc: tvoc,

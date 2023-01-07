@@ -47,6 +47,12 @@ const Layout = ()=> {
         icon:  <BarChartIcon />,
         path:  '/report'
     },
+
+    {
+        text: 'Relatório NeoNatAir',
+        icon:  <BarChartIcon />,
+        path:  '/reportnew'
+    },
     
   ]
   const menuItemSub = [

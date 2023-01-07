@@ -3,6 +3,16 @@ import { conexao } from "../config/db.js";
 import { Leito } from "./LeitoModel.js";
 
 export const Alerta = conexao.define('alerta', {
+    idAlerta: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    idLeito: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     data: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -39,16 +49,6 @@ export const Alerta = conexao.define('alerta', {
     }
 }
 )
-Alerta.belongsToMany(Leito, {
-    through: 'alerta_leitos',
-    foreignKey: 'idAlerta',
-    otherKey: 'idLeito'
-})
-Leito.belongsToMany(Alerta, {
-    through: 'alerta_leitos',
-    foreignKey: 'idLeito',
-    otherKey: 'idAlerta'
-})
 
 
 //Cria tabela
