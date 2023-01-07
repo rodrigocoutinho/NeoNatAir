@@ -37,7 +37,7 @@ app.post('/api/leito', cadastrarLeito);
 app.get('/api/leitos', getLeitos);
 app.get('/api/leito/:id', getLeito);
 app.delete('/api/leito/:id', apagarLeito);
-app.put('/api/leito:id', atualizarLeito);
+app.put('/api/leito/:id', atualizarLeito);
 
 app.get('/users', verifyToken, GetUsers);
 app.post('/login', Login);
