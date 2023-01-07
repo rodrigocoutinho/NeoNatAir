@@ -30,7 +30,7 @@ const ExpandMore = styled((props) => {
 
   const ITEM_HEIGHT = 40;
 
-const CardLeito = ({data,handleDelete})=>{
+const CardLeito = ({data,handleDelete, handleUpdate})=>{
     const [expanded, setExpanded] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -86,7 +86,7 @@ const CardLeito = ({data,handleDelete})=>{
                       <VisibilityOutlinedIcon sx={{mr:1}}/>
                         Parâmetros
                   </MenuItem>
-                    <MenuItem  onClick={handleClose} >
+                    <MenuItem  onClick={()=>{handleUpdate(data.idLeito)}} >
                       <EditOutlinedIcon sx={{mr:1}}/>
                         Editar
                     </MenuItem>

@@ -6,18 +6,14 @@ import { Container,Grid } from '@mui/material';
 import axios from 'axios';
 import CardLeito from '../components/CardLeito';
 import CircularProgress from '@mui/material/CircularProgress';
+import {useNavigate} from 'react-router-dom';
 
 const MonitoredEnvironmentLeito = () => {
   const [ambientes, setAmbientes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   
 
-/*    const getToken  =  async ()=> {
-    var response = await axios.post('https://backend-api-floats.vercel.app/api/login', { 'usr': 'inf', 'pass': '25d55ad283aa400af464c76d713c07ad' });
-    const {session_token} = response.data;
-    return session_token;
-    }*/
-  
   useEffect(()=>{
     
     const getAmbientes = async()=>{
@@ -46,6 +42,12 @@ const MonitoredEnvironmentLeito = () => {
       return setAmbientes(response.data);
      
   }
+
+  const cardUpdate = async(id)=>{
+    setLoading(true); 
+    navigate(`/leito/${id}`);
+     
+  }
   
   return (
      <Container maxWidth="md" sx={{textAlign: 'center'}}>
@@ -67,6 +69,7 @@ const MonitoredEnvironmentLeito = () => {
                           <CardLeito 
                             data={data}
                             handleDelete={cardDelete}
+                            handleUpdate={cardUpdate}
                           />
                       </Grid>
                 ))
