@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import { conexao } from "../config/db.js";
-import { Leito } from "./LeitoModel.js";
 
 export const Alerta = conexao.define('alerta', {
     idAlerta: {
@@ -9,7 +8,15 @@ export const Alerta = conexao.define('alerta', {
         primaryKey: true,
         autoIncrement: true
     },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     idLeito: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    idAirPure: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
