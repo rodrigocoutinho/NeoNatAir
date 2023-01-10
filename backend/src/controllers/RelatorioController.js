@@ -42,7 +42,7 @@ export async function apagarRelatorio (req,res) {
         
         await Relatorio.destroy({
             where: {
-                id: req.params.id
+                idRelatorio: req.params.id
               }
         });
         res.json({msg: "Relatório excluido com sucesso!"});

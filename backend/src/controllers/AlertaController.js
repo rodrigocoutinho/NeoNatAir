@@ -43,7 +43,7 @@ export async function apagarAlerta (req,res) {
         
         await Alerta.destroy({
             where: {
-                id: req.params.id
+                idAlerta: req.params.id
               }
         });
         res.json({msg: "Alerta excluido com sucesso!"});
