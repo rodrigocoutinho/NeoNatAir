@@ -22,11 +22,6 @@ const columns = [
     type: 'number',
   },
   {
-    field: 'idAirPure',
-    headerName: 'ID AirPure',
-    type: 'number',
-  },
-  {
     field: 'Co2',
     headerName: 'Co2 (PPM)',
     type: 'number',
@@ -59,9 +54,9 @@ const columns = [
 ];
 
 const rows = [
-  {  nome: 'Nome 1', id: 1, idLeito: 1, idAirPure: 1, Co2: 1, RuidoSonoro: 1, Luminosidade: 1, Temperatura: 1, COVT: 1, Umidade: 1 },
-  {  nome: 'Nome 2', id: 2, idLeito: 2, idAirPure: 2, Co2: 2, RuidoSonoro: 2, Luminosidade: 2, Temperatura: 2, COVT: 2, Umidade: 2 },
-  {  nome: 'Nome 3', id: 3, idLeito: 3, idAirPure: 3, Co2: 3, RuidoSonoro: 3, Luminosidade: 3, Temperatura: 3, COVT: 3, Umidade: 3 },
+  {  nome: 'Nome 1', id: 1, idLeito: 1, Co2: 1, RuidoSonoro: 1, Luminosidade: 1, Temperatura: 1, COVT: 1, Umidade: 1 },
+  {  nome: 'Nome 2', id: 2, idLeito: 2, Co2: 2, RuidoSonoro: 2, Luminosidade: 2, Temperatura: 2, COVT: 2, Umidade: 2 },
+  {  nome: 'Nome 3', id: 3, idLeito: 3, Co2: 3, RuidoSonoro: 3, Luminosidade: 3, Temperatura: 3, COVT: 3, Umidade: 3 },
 ];
 
 const ReportNew = () => {

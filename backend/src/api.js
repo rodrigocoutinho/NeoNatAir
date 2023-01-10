@@ -10,6 +10,7 @@ import {GetUsers, Login, Register, Logout} from "./controllers/UsuarioController
 //import Alert from './controllers/Alert.js'
 import { getLeitos, getLeito, apagarLeito, atualizarLeito, cadastrarLeito } from './controllers/LeitoController.js';
 import { cadastrarAlerta, getAlerta, getAlertas, apagarAlerta } from './controllers/AlertaController.js';
+import { cadastrarRelatorio, getRelatorio, getRelatorios, apagarRelatorio } from './controllers/RelatorioController.js';
 
 
 dotenv.config();
@@ -52,6 +53,12 @@ app.get('/api/alerta/:id', getAlerta);
 app.get('/api/alertas', getAlertas);
 app.post('/api/alerta', cadastrarAlerta);
 app.delete('/api/alerta', apagarAlerta);
+
+//Alerta
+app.get('/api/relatorio/:id', getRelatorio);
+app.get('/api/relatorios', getRelatorios);
+app.post('/api/relatorio', cadastrarRelatorio);
+app.delete('/api/relatorio/:id', apagarRelatorio);
 
 
 

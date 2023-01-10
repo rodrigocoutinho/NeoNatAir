@@ -1,26 +1,25 @@
-import { Alerta } from '../models/AlertaModel.js';
+import { Relatorio } from '../models/RelatorioModel.js';
 
-export async function getAlertas (req, res){
-    const response = await Alerta.findAll();
+export async function getRelatorios (req, res){
+    const response = await Relatorio.findAll();
     console.log(response)
     res.json(response)
 }
 
-export async function getAlerta (req, res){
-    const response = await Alerta.findByPk(req.params.id);
+export async function getRelatorio (req, res){
+    const response = await Relatorio.findByPk(req.params.id);
     console.log(response)
     res.json(response)
 }
 
-export async function cadastrarAlerta(req,res){
+export async function cadastrarRelatorio(req,res){
     const { nome, idLeito, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
     
     try {
         
-        await Alerta.create({
+        await Relatorio.create({
             nome: nome,
             idLeito: idLeito,
-            data: new Date(),
             temperatura: temperatura,
             co2: co2,
             tvoc: tvoc,
@@ -29,7 +28,7 @@ export async function cadastrarAlerta(req,res){
             ruido: ruido
 
         });
-        res.json({msg: "Alerta criado com sucesso!"});
+        res.json({msg: "Relatório criado com sucesso!"});
     } catch (error){
         res.status (400)
         res.send ({msg: "Erro 400", error})
@@ -37,16 +36,16 @@ export async function cadastrarAlerta(req,res){
     }
 };
 
-export async function apagarAlerta (req,res) {
+export async function apagarRelatorio (req,res) {
    
     try {
         
-        await Alerta.destroy({
+        await Relatorio.destroy({
             where: {
                 id: req.params.id
               }
         });
-        res.json({msg: "Alerta excluido com sucesso!"});
+        res.json({msg: "Relatório excluido com sucesso!"});
     } catch (error){
         res.status (400)
         res.send ({msg: "Erro 400", error})
