@@ -39,11 +39,17 @@ export async function Register (req,res) {
         return true;
     }
 
+    function validarEmail(email) {
+        var regex = /^[\w._-]+@[\w_.-]+\.[\w][2,]/;
+        //var regex = /\S+@\S+\.\S+/;
+        return regex.test(email);
+      }
+
     if(cpf == null || cpf == '')return res.status(400).json({msg: "CPF inválido!"});
     if(telefone == null || telefone == '')return res.status(400).json({msg: "Telefone inválido!"});
     if(name == null || name == '')return res.status(400).json({msg: "Nome inválido!"});
-    if(email == null || email == '')return res.status(400).json({msg: "Email inválido!"});
-    if(password == null || password == '' || validaCPF(cpf))return res.status(400).json({msg: "Password inválido!"});
+    if(email == null || email == '' || !validarEmail(email))return res.status(400).json({msg: "Email inválido!"});
+    if(password == null || password == '' || !validaCPF(cpf))return res.status(400).json({msg: "Password inválido!"});
 
     if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
     
