@@ -18,11 +18,32 @@ export async function GetUsers (req, res) {
 export async function Register (req,res) {
     const { cpf, telefone, name, email, password, confPassword } = req.body;
 
+    const validaCPF = (cpf) => {
+        var soma;
+        var resto;
+        soma = 0;
+      if (cpf == "00000000000") return false;
+    
+      for (i=1; i<=9; i++) soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
+      resto = (soma * 10) % 11;
+    
+        if ((resto == 10) || (resto == 11))  resto = 0;
+        if (resto != parseInt(cpf.substring(9, 10)) ) return false;
+    
+      soma = 0;
+        for (i = 1; i <= 10; i++) soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
+        resto = (soma * 10) % 11;
+    
+        if ((resto == 10) || (resto == 11))  resto = 0;
+        if (resto != parseInt(cpf.substring(10, 11) ) ) return false;
+        return true;
+    }
+
     if(cpf == null || cpf == '')return res.status(400).json({msg: "CPF inválido!"});
     if(telefone == null || telefone == '')return res.status(400).json({msg: "Telefone inválido!"});
     if(name == null || name == '')return res.status(400).json({msg: "Nome inválido!"});
     if(email == null || email == '')return res.status(400).json({msg: "Email inválido!"});
-    if(password == null || password == '')return res.status(400).json({msg: "Password inválido!"});
+    if(password == null || password == '' || validaCPF(cpf))return res.status(400).json({msg: "Password inválido!"});
 
     if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
     
