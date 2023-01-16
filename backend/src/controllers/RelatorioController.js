@@ -13,13 +13,14 @@ export async function getRelatorio (req, res){
 }
 
 export async function cadastrarRelatorio(req,res){
-    const { nome, idLeito, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
+    const { nome, idLeito, idAirPure, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
     
     try {
         
         await Relatorio.create({
             nome: nome,
             idLeito: idLeito,
+            idAirPure: idAirPure,
             temperatura: temperatura,
             co2: co2,
             tvoc: tvoc,

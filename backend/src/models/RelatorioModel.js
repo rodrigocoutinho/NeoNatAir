@@ -12,8 +12,8 @@ export const Relatorio = conexao.define('relatorio', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    data: {
-        type: Sequelize.DATE,
+    idAirPure: {
+        type: Sequelize.INTEGER,
         allowNull: false,
     },
 

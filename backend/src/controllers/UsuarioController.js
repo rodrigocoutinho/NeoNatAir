@@ -17,6 +17,13 @@ export async function GetUsers (req, res) {
 
 export async function Register (req,res) {
     const { cpf, telefone, name, email, password, confPassword } = req.body;
+
+    if(cpf == null || cpf == '')return res.status(400).json({msg: "CPF inválido!"});
+    if(telefone == null || telefone == '')return res.status(400).json({msg: "Telefone inválido!"});
+    if(name == null || name == '')return res.status(400).json({msg: "Nome inválido!"});
+    if(email == null || email == '')return res.status(400).json({msg: "Email inválido!"});
+    if(password == null || password == '')return res.status(400).json({msg: "Password inválido!"});
+
     if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
     
     try {

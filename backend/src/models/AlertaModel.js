@@ -16,11 +16,6 @@ export const Alerta = conexao.define('alerta', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    data: {
-        type: Sequelize.DATE,
-        allowNull: false,
-    },
-
     temperatura: {
         type: Sequelize.FLOAT,
         allowNull: true

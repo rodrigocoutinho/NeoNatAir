@@ -20,7 +20,6 @@ export async function cadastrarAlerta(req,res){
         await Alerta.create({
             nome: nome,
             idLeito: idLeito,
-            data: new Date(),
             temperatura: temperatura,
             co2: co2,
             tvoc: tvoc,
