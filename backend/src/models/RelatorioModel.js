@@ -16,6 +16,10 @@ export const Relatorio = conexao.define('relatorio', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
 
     temperatura: {
         type: Sequelize.FLOAT,
