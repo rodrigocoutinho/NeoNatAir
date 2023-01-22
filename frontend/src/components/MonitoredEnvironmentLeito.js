@@ -15,7 +15,7 @@ const MonitoredEnvironmentLeito = () => {
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
   const datetime = new Date().toJSON().slice(0, 19).replace('T', ' ')
-  console.log(datetime);
+  //console.log(datetime);
 
   useEffect(()=>{
     
