@@ -89,6 +89,34 @@ const CardLeito = ({ data, handleLeitura, handleDelete, handleUpdate }) => {
   }
   setTimeout(() => { gravarRelatorio(data, airPure); }, 10000)
 
+  const gravarAlerta = async (data, airPure) => {
+    var response = await axios.post('http://localhost:8080/api/alerta', {
+      nome: data.nome,
+      idLeito: data.idLeito,
+      temperatura: airPure.temperatura,
+      co2: airPure.co2,
+      tvoc: airPure.tvoc,
+      umidade: airPure.umidade,
+      luminosidade: airPure.luminosidade,
+      ruido: airPure.ruido
+    })
+    return response.data;
+  }
+
+  if (!airPure.temperatura || airPure.temperatura > data.limitCOVT) {
+    gravarAlerta(data, airPure);
+  } else if (!airPure.co2 || airPure.co2 > data.limitCo2) {
+    gravarAlerta(data, airPure);
+  } else if (!airPure.tvoc || airPure.tvoc > data.limitUmidade) {
+    gravarAlerta(data, airPure);
+  } else if (!airPure.umidade || airPure.umidade > data.limitTemperatura) {
+    gravarAlerta(data, airPure);
+  } else if (!airPure.luminosidade || airPure.luminosidade > data.limitLuminosidade) {
+    gravarAlerta(data, airPure);
+  } else if (!airPure.ruido || airPure.ruido > data.limitRuidoSonoro) {
+    gravarAlerta(data, airPure);
+  }
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
 
