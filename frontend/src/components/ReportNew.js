@@ -4,6 +4,8 @@ import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { Container } from '@mui/system';
 import { DataGrid } from '@mui/x-data-grid';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 const columns = [
   {
@@ -60,6 +62,26 @@ const rows = [
 ];
 
 const ReportNew = () => {
+  let [relatorios, setRelatorios] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(()=>{
+    
+    const getRelatorios = async()=>{
+      setLoading(true); 
+
+      let response = await axios.get(`http://localhost:8080/api/relatorios`)
+      setLoading(false); 
+      return setRelatorios(response.data);
+    } 
+    
+    getRelatorios();
+       
+  
+  },[])
+
+  console.log(relatorios);
+
   return (
     <Container maxWidth="lg" >
         <Box>
