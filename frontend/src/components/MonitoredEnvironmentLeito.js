@@ -12,7 +12,10 @@ const MonitoredEnvironmentLeito = () => {
   const [ambientes, setAmbientes] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  const datetime = new Date().toJSON().slice(0, 19).replace('T', ' ')
+  //console.log(datetime);
 
   useEffect(()=>{
     

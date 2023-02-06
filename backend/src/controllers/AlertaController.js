@@ -13,12 +13,13 @@ export async function getAlerta (req, res){
 }
 
 export async function cadastrarAlerta(req,res){
-    const { data, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
+    const { nome, idLeito, temperatura, co2, tvoc, umidade, luminosidade, ruido } = req.body;
     
     try {
         
         await Alerta.create({
-            data: data,
+            nome: nome,
+            idLeito: idLeito,
             temperatura: temperatura,
             co2: co2,
             tvoc: tvoc,
@@ -41,7 +42,7 @@ export async function apagarAlerta (req,res) {
         
         await Alerta.destroy({
             where: {
-                id: req.params.id
+                idAlerta: req.params.id
               }
         });
         res.json({msg: "Alerta excluido com sucesso!"});

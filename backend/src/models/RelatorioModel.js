@@ -1,21 +1,26 @@
 import { Sequelize } from "sequelize";
 import { conexao } from "../config/db.js";
 
-export const Alerta = conexao.define('alerta', {
-    idAlerta: {
+export const Relatorio = conexao.define('relatorio', {
+    idRelatorio: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    nome: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     idLeito: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+    idAirPure: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
     temperatura: {
         type: Sequelize.FLOAT,
         allowNull: true
@@ -50,4 +55,4 @@ export const Alerta = conexao.define('alerta', {
 
 
 //Cria tabela
-Alerta.sync();
+Relatorio.sync();
