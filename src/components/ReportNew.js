@@ -6,6 +6,7 @@ import { Container } from '@mui/system';
 import { DataGrid } from '@mui/x-data-grid';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import server from '../services/server';
 
 const columns = [
   {
@@ -74,7 +75,7 @@ const ReportNew = () => {
     const getRelatorios = async()=>{
       setLoading(true); 
 
-      let response = await axios.get(`http://localhost:8080/api/relatorios`)
+      let response = await axios.get(`${server}/api/relatorios`)
       setLoading(false); 
       return setRelatorios(response.data);
     } 

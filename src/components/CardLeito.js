@@ -17,6 +17,7 @@ import { useState, useEffect } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
+import server from '../services/server';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -74,7 +75,7 @@ const CardLeito = ({ data, handleLeitura, handleDelete, handleUpdate }) => {
 
 
   const gravarRelatorio = async (data, airPure) => {
-    var response = await axios.post('http://localhost:8080/api/relatorio', {
+    var response = await axios.post(server + '/api/relatorio', {
       nome: data.nome,
       idLeito: data.idLeito,
       idAirPure: data.idAirPure,
@@ -90,7 +91,7 @@ const CardLeito = ({ data, handleLeitura, handleDelete, handleUpdate }) => {
   setTimeout(() => { gravarRelatorio(data, airPure); }, 10000)
 
   const gravarAlerta = async (data, airPure) => {
-    var response = await axios.post('http://localhost:8080/api/alerta', {
+    var response = await axios.post(server +'/api/alerta', {
       nome: data.nome,
       idLeito: data.idLeito,
       temperatura: airPure.temperatura,

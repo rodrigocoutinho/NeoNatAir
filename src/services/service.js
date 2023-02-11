@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:8080/api/";
+import server from './server';
 
 const createLeito = (idAirPure, nome, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade) => {
-  return axios.post(API_URL + "leito", {
+  return axios.post(server + "/api/leito", {
     idAirPure,
     nome, 
     limitCo2, 

@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import server from '../services/server';
 
 
 
@@ -25,7 +26,6 @@ const SignUpSide = () => {
   const [confPassword, setConfPassword] = useState('');
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
-  const server = 'http://localhost:8080'
 
   async function Register() {
 

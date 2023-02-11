@@ -7,6 +7,7 @@ import axios from 'axios';
 import CardLeito from '../components/CardLeito';
 import CircularProgress from '@mui/material/CircularProgress';
 import {useNavigate} from 'react-router-dom';
+import server from '../services/server';
 
 const MonitoredEnvironmentLeito = () => {
   const [ambientes, setAmbientes] = useState([]);
@@ -22,7 +23,7 @@ const MonitoredEnvironmentLeito = () => {
     const getAmbientes = async()=>{
       setLoading(true); 
       //var sessionToken =  await getToken();  
-      let response = await axios.get(`http://localhost:8080/api/leitos`, { /*headers: { sessionToken: sessionToken }*/})
+      let response = await axios.get(`${server}/api/leitos`, { /*headers: { sessionToken: sessionToken }*/})
       setLoading(false); 
       return setAmbientes(response.data);
     } 
@@ -41,7 +42,7 @@ const MonitoredEnvironmentLeito = () => {
   const cardDelete = async(id)=>{
     setLoading(true); 
       //var sessionToken =  await getToken();  
-      let response = await axios.delete(`http://localhost:8080/api/leito/${id}`);
+      let response = await axios.delete(`${server}/api/leito/${id}`);
       return setAmbientes(response.data);
      
   }

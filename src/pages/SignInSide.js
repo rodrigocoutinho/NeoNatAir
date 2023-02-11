@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ImgSignin from '../assets/signinImg.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import server from '../services/server';
 
 function Copyright(props) {
   return (
@@ -46,7 +47,6 @@ const SignInSide = () => {
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
-  const server = 'http://localhost:8080'
 
 
   async function Auth() {

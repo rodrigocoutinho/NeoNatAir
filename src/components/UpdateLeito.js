@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import server from '../services/server';
 
 import Alert from '@mui/material/Alert';
 
@@ -32,7 +33,7 @@ const UpdateLeito = () => {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:8080/api/leito/${id}`)
+        axios.get(`${server}/api/leito/${id}`)
             .then((resp) => {
                 setIdAirPure(resp.data.idAirPure)
                 setNome(resp.data.nome)
@@ -50,7 +51,7 @@ const UpdateLeito = () => {
 
 
     const handleUpdate = async () => {
-        await axios.put(`http://localhost:8080/api/leito/${id}`, {
+        await axios.put(`${server}/api/leito/${id}`, {
             idAirPure,
             nome,
             limitCo2,
