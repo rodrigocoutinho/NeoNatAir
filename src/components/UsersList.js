@@ -40,7 +40,6 @@ const UsersList = () => {
         name: row.name,
         cpf: row.cpf,
         email: row.email,
-        roles: row.roles.name,
         createdAt: row.createdAt
 
 
@@ -52,7 +51,6 @@ const UsersList = () => {
         { field: 'name', headerName: 'Nome', width: 150 },
         { field: 'cpf', headerName: 'cpf', width: 150 },
         { field: 'email', headerName: 'Email', width: 150 },
-        { field: 'roles', headerName: 'Roles', width: 150 },
         { field: 'createdAt', headerName: 'Data de criação', width: 150 },
 
         {

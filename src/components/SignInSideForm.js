@@ -51,7 +51,7 @@ const SignInSideForm = () => {
     if (JSON.stringify(data) !== {}) {
       AuthserveceApi.login(data.email, data.password).then(
         () => {
-          navigate("/wellcome");
+          navigate("/");
           window.location.reload();
         },
         (error) => {

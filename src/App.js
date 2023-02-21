@@ -19,11 +19,10 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
+        <Route path="/loginOrRegister" element={<LoginOrRegister />} />
 
-        <Route path="/" element={<LoginOrRegister />} />
-      
         <Route element={<RequireAuth />}>
-        <Route path="/wellcome" element={[<Layout />, <Wellcome />]} />
+          <Route path="/" element={[<Layout />, <Wellcome />]} />
           <Route path="/leitoform" element={[<Layout />, <CreateLeitos />]} />
           <Route path="/leitoform-update/:id" element={[<Layout />, <UpdateLeito />]} />
           <Route path="/monitored-leitos" element={[<Layout />, <MonitoredEnvironmente />]} />
