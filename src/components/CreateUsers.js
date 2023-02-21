@@ -33,7 +33,7 @@ const CreateUsers = (props) => {
                 () => {
                     setSuccessful(true);
                     reset();
-                    setTimeout(() => setSuccessful(false), 2000);
+                    setTimeout(() => setSuccessful(false), 3000);
 
                 },
                 (error) => {
