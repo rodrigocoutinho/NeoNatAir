@@ -36,8 +36,6 @@ const SignUpSide = () => {
      AuthserviceApi.registerUser(data.cpf, data.telefone, data.name, data.email, data.roles, data.password, data.confPassword).then(
         () => {
           navigate("/");
-          window.location.reload();
-
         },
         (error) => {
           const resMessage =
