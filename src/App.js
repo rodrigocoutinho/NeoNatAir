@@ -11,6 +11,7 @@ import Users from './pages/Users';
 import UpdateUsers from './pages/UpdateUsers';
 import LoginOrRegister from './pages/LoginOrRegister';
 import RequireAuth from './services/requireAuth';
+import Wellcome from './pages/Wellcome';
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
       <Routes>
 
         <Route path="/" element={<LoginOrRegister />} />
-       
+      
         <Route element={<RequireAuth />}>
+        <Route path="/wellcome" element={[<Layout />, <Wellcome />]} />
           <Route path="/leitoform" element={[<Layout />, <CreateLeitos />]} />
           <Route path="/leitoform-update/:id" element={[<Layout />, <UpdateLeito />]} />
           <Route path="/monitored-leitos" element={[<Layout />, <MonitoredEnvironmente />]} />

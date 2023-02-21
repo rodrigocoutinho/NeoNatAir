@@ -52,7 +52,7 @@ const SignInSideForm = () => {
       AuthserveceApi.login(data.email, data.password).then(
         () => {
           navigate("/wellcome");
-        
+          window.location.reload();
         },
         (error) => {
           const resMessage =
@@ -94,7 +94,7 @@ const SignInSideForm = () => {
           variant="standard"
           fullWidth
           id="email"
-          label="Email Address"
+          label="Email"
           autoComplete="email"
           {...register("email", {
             required: {
@@ -115,7 +115,7 @@ const SignInSideForm = () => {
           required
           variant="standard"
           fullWidth
-          label="Criar senha"
+          label="senha"
           type="password"
           id="password"
           {...register("password", {

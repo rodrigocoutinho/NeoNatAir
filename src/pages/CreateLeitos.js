@@ -92,7 +92,7 @@ const CreateLeitos = () => {
     return (
 
         <Container maxWidth="sm" sx={{ textAlign: 'center' }}>
-            <Paper sx={{ width: '800px', position: 'fixed', mt: 5 }}>
+            <Paper sx={{ width: '800px', mt: 2 }}>
 
                 {
                     messageError ? <Alert severity="error" sx={style} >{messageError}</Alert> :
