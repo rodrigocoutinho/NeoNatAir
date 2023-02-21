@@ -12,7 +12,7 @@ const Wellcome = () => {
     return (
         <Container maxWidth="sm" sx={{textAlign: 'center',color:'#888888'}}>
             <Typography variant="h4" component="div" sx={{marginTop:20,color:'#143053'}}>
-                Bem vindo ao Sistema NeoNatAir, versão com Deploy automático !
+                Bem vindo ao Sistema NeoNatAir !
             </Typography>
             <Typography variant="h6" component="div" >
                 Vamos començar nossa jornada ?!

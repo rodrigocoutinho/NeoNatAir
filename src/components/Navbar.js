@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect, useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,9 +7,10 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
- 
- 
+import EventExp from '../checkToken/EventExp'
+import { Logout } from '@mui/icons-material';
 import {useNavigate} from "react-router-dom";
+import AuthserveceApi from '../services/authService';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -41,11 +42,29 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   }));
   
 
-const Navbar = () =>{
-   
+const NavBar = () =>{
+    const [currentUser, setCurrentUser] = useState(undefined);
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        const user = AuthserveceApi.getCurrentUser();
+        if(user){
+            setCurrentUser(user);
+        }
+        EventExp.on("logout",()=>{
+            Logout();
+        });
+        return ()=>{
+            EventExp.remove("logout");
+        };
+    },[])
+
+    const logOut = () => {
+      AuthserveceApi.logout();
+        setCurrentUser(undefined);
+        navigate("/")
+    };
     return(
-      <>
         <Box sx={{ flexGrow: 1 }}>  
          <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
@@ -53,7 +72,7 @@ const Navbar = () =>{
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                    <strong>{"NeoNatAir"}</strong> 
                 </Typography>
-               {0 ? (
+               {currentUser ? (
                 <Box sx={{ flexGrow: 0 ,me: 2 }}>
                     <StyledBadge
                         overlap="circular"
@@ -62,18 +81,14 @@ const Navbar = () =>{
                     >
                     <Avatar/>
                   </StyledBadge>
-                  <Button color="inherit"  sx={{ ml: 2}}>logout</Button>
+                  <Button color="inherit" onClick={logOut} sx={{ ml: 2}}>logout</Button>
               </Box>
                 ) : ( 
-              <Box sx={{ flexGrow: 0 }}>
-                 <Button color="inherit" onClick={()=>{navigate("/")}}>Sign In</Button>
-                 <Button color="inherit" onClick={()=>{navigate("/signup")}}>Sign Up</Button>
-                </Box>
+                  ""
                 )}
             </Toolbar>
         </AppBar>
      </Box> 
-     </>
     );
 }
-export default Navbar
+export default NavBar

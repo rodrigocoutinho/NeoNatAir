@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -13,34 +12,10 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getLeitos } from '../services/serviceApi';
 
-function createData(name, idAirpures, qntAlertas) {
-  return {
-    name,
-    idAirpures,
-    qntAlertas,
-    
-    history: [
-      {
-        date: '2020-01-05',
-        hora: '23:00',
-        co2: '0',
-        tvoc: '0',
-        umidade: '0',
-        temperatura:'0'
-      },
-      {
-        date: '2020-01-05',
-        hora: '23:00',
-        co2: '0',
-        tvoc: '0',
-        umidade: '0',
-        temperatura:'0'
-      },
-    ],
-  };
-}
+
 
 function Row(props) {
   const { row } = props;
@@ -48,6 +23,7 @@ function Row(props) {
 
   return (
     <>
+
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
@@ -58,97 +34,115 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
+
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.nome}
         </TableCell>
-        <TableCell align="right">{row.idAirpures}</TableCell>
-        <TableCell align="right">{row.qntAlertas}</TableCell>
-        
+        <TableCell align="center"> <strong> id : </strong>{row.idAirPure}</TableCell>
+
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                History
+            <Box sx={{ margin: 2 }}>
+              <Typography variant="body" gutterBottom component="div" sx={{textAlign:"center", mt:5,mb:2}}>
+                <strong>Dados de criação dos leitos com parâmetros limites para alertas de não conformidades</strong>
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Hora</TableCell>
-                    <TableCell align="right">Co2</TableCell>
-                    <TableCell align="right">tvoc</TableCell>
-                    <TableCell align="right">Umidade</TableCell>
-                    <TableCell align="right">Temperatura</TableCell>
+                    <TableCell>Data</TableCell>
+                    <TableCell align="right">Limite Co2</TableCell>
+                    <TableCell align="right">Limite COVT</TableCell>
+                    <TableCell align="right">Limite Luminosidade</TableCell>
+                    <TableCell align="right">Limite Ruido sonoro</TableCell>
+                    <TableCell align="right">Limite Temperatura</TableCell>
+                    <TableCell align="right">Limite Umidade</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                  
+                    <TableRow >
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {row.createdAt}
                       </TableCell>
-                      <TableCell>{historyRow.hora}</TableCell>
-                      <TableCell align="right">{historyRow.co2}</TableCell>
-                      <TableCell align="right">{historyRow.tvoc}</TableCell>
-                      <TableCell align="right">{historyRow.umidade}</TableCell>
-                      <TableCell align="right">{historyRow.temperatura}</TableCell>
-                      
+                      <TableCell align="center">{row.limitCo2}</TableCell>
+                      <TableCell align="center">{row.limitCOVT}</TableCell>
+                      <TableCell align="center">{row.limitLuminosidade}</TableCell>
+                      <TableCell align="center">{row.limitRuidoSonoro}</TableCell>
+                      <TableCell align="center">{row.limitTemperatura}</TableCell>
+                      <TableCell align="center">{row.limitUmidade}</TableCell>
+
                     </TableRow>
-                  ))}
+               
                 </TableBody>
               </Table>
             </Box>
+
+            
           </Collapse>
         </TableCell>
       </TableRow>
+
     </>
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    idAirpures: PropTypes.number.isRequired,
-    qntAlertas: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
-const rows = [
-  createData('Recepção', 159, 6),
-  createData('Consultório-01', 237,0),
-  createData('Triagem-sala-04', 262, 16),
-  createData('UTI-sala-03', 305, 3.7),
-  createData('Consultório-10', 356, 16),
-];
 
 export default function CollapsibleTable() {
+  const [leitos, setLeitos] = useState([]);
+
+  const getLeitosCreated = async () => {
+    let response = await getLeitos();
+    return setLeitos(response.data);
+  }
+
+  useEffect(() => {
+    getLeitosCreated();
+  }, [])
+
+  const rows = leitos.map((row, index) => ({
+    id: index,
+    idLeito: row.idLeito,
+    idAirPure: row.idAirPure,
+    nome: row.nome,
+    limitCo2: row.limitCo2,
+    limitCOVT: row.limitCOVT,
+    limitLuminosidade: row.limitLuminosidade,
+    limitRuidoSonoro: row.limitRuidoSonoro,
+    limitTemperatura: row.limitTemperatura,
+    limitUmidade: row.limitUmidade,
+    createdAt: row.createdAt
+
+
+  }));
+
+  const qnt = leitos.length;
+  console.log(qnt);
+
+
   return (
-    <TableContainer component={Paper}>
+
+    <TableContainer component={Paper} sx={{ height: 400, width: '100%' }}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Ambientes</TableCell>
-            <TableCell align="right">IdAirpure</TableCell>
-            <TableCell align="right">Qnt-Alertas</TableCell>
-            
+            <TableCell><strong>Nome Leitos</strong></TableCell>
+            <TableCell align="center"><strong>IdAirpure</strong></TableCell>
+             
+
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row  key={row.name} row={row} />
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+
+
   );
 }

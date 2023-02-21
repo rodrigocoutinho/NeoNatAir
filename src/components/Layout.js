@@ -31,13 +31,7 @@ const Layout = ()=> {
     },
 
     {
-      text: 'Airpures',
-      icon: <MonitorHeartOutlinedIcon/>,
-      path:  '/monitored-airpures'
-  },
-
-    {
-      text: 'Leitos',
+      text: 'Monitoramento',
       icon: <MonitorHeartOutlinedIcon/>,
       path:  '/monitored-leitos'
   },
@@ -47,34 +41,29 @@ const Layout = ()=> {
         icon:  <BarChartIcon />,
         path:  '/report'
     },
-
-    {
-        text: 'Relatório NeoNatAir',
-        icon:  <BarChartIcon />,
-        path:  '/reportnew'
-    },
     
   ]
   const menuItemSub = [
 
     {
+      text: 'Usuários',
+      icon: <PermIdentityIcon/>,
+      path:  '/users'
+  },
+  
+
+    {
         text: 'Configurações',
         icon: <SettingsOutlinedIcon/>,
-        path:  '/setting'
+        path:   '/monitored-leitos'
     },
 
     {
         text: 'Notificações',
         icon: <NotificationsNoneOutlinedIcon/>,
-        path:  "/"
-    },
+        path:  '/monitored-leitos'
+    }
 
-    {
-        text: 'Perfil',
-        icon: <PermIdentityIcon/>,
-        path:  '/profile'
-    },
-    
   ]
 
 
@@ -115,7 +104,7 @@ const Layout = ()=> {
             </List>
         </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3,}}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3}}>
         <Toolbar />
      
       </Box>
