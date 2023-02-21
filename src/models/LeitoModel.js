@@ -1,50 +1,50 @@
-import { Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 import { conexao } from "../config/db.js";
 import { Alerta } from "./AlertaModel.js";
-//Define a tabela de usuários e suas colunas, conforme documentação do sequelize
+//Define a tabela de usuários e suas colunas, conforme documentação do DataTypes
 
 export const Leito = conexao.define('leito', {
     idLeito: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
 
-    idAirPure:{
-        type: Sequelize.INTEGER
+    idAirPure: {
+        type: DataTypes.INTEGER
     },
 
     nome: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
     },
     limitCo2: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: null
     },
     limitRuidoSonoro: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: null
 
     },
     limitLuminosidade: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: null
 
     },
     limitTemperatura: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: null
 
     },
     limitCOVT: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: null
-        
+
 
     },
     limitUmidade: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: null
 
     }

@@ -93,7 +93,7 @@ export async function GetUltimaLeitura(req,res){
 
     let idAmbiente = req.params.idAmbiente;
 
-    const airPureResponse = await fetch(`${serverURL}/api/ultimoValor/3`, {
+    const airPureResponse = await fetch(`${serverURL}/api/ultimoValor/${idAmbiente}`, {
         method: "GET",
         headers:{
             'sessiontoken': TOKEN, 
@@ -114,7 +114,7 @@ export async function GetUltimaLeitura(req,res){
 
 
     res.status(airPureResponse.status)
-    res.json(body)
+    res.json(await airPureResponse.json())
 }
 
 

@@ -1,48 +1,48 @@
-import { Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 import { conexao } from "../config/db.js";
 
 export const Alerta = conexao.define('alerta', {
     idAlerta: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
     nome: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     idLeito: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     temperatura: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     co2: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     tvoc: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     umidade: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     luminosidade: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     ruido: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     }
 }
