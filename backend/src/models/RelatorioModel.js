@@ -1,53 +1,53 @@
-import { Sequelize } from "sequelize";
+import {DataTypes  } from "sequelize";
 import { conexao } from "../config/db.js";
 
 export const Relatorio = conexao.define('relatorio', {
     idRelatorio: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
     idLeito: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     idAirPure: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     nome: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
 
     temperatura: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     co2: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     tvoc: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     umidade: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     luminosidade: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     },
 
     ruido: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: true
     }
 }

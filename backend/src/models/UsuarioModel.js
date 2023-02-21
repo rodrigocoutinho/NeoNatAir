@@ -1,43 +1,34 @@
-import { Sequelize } from "sequelize";
+import { DataTypes  } from "sequelize";
 import { conexao } from "../config/db.js";
 
 //Define a tabela de usuários e suas colunas, conforme documentação do sequelize
 
-export const Usuario = conexao.define('usuario', {
+export const Usuario = conexao.define('usuarios', {
     cpf: {
-        type: Sequelize.STRING(11),
+        type: DataTypes.STRING,
         allowNull: false,
     },
 
     email: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
 
     name: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
 
     password: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
 
     telefone: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
-
-    perfil: {
-        type: Sequelize.STRING,
-        allowNull: true,
-    },
-
-    refresh_token: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-    }
+    
 });
 
 //Cria tabela
