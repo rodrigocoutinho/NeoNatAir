@@ -51,8 +51,8 @@ const SignInSideForm = () => {
     if (JSON.stringify(data) !== {}) {
       AuthserveceApi.login(data.email, data.password).then(
         () => {
-          navigate("/monitored-leitos");
-          window.location.reload();
+          navigate("/wellcome");
+          //window.location.reload();
 
         },
         (error) => {
