@@ -180,8 +180,8 @@ const CreateLeitos = () => {
                                             message: 'Insira um número valido!'
                                         }
                                     })}
-                                    error={Boolean(errors.limitCO2)}
-                                    helperText={errors.limitCO2?.message}
+                                    error={Boolean(errors.limitCo2)}
+                                    helperText={errors.limitCo2?.message}
 
                                 />
                             </Grid>
