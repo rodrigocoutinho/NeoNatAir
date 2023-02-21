@@ -35,7 +35,7 @@ const SignUpSide = () => {
     if (JSON.stringify(data) !== {}) {
      AuthserviceApi.registerUser(data.cpf, data.telefone, data.name, data.email, data.roles, data.password, data.confPassword).then(
         () => {
-          navigate("/wellcome");
+          navigate("/");
           window.location.reload();
 
         },
