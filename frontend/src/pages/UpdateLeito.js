@@ -95,7 +95,7 @@ const UpdateLeito = () => {
 
 
     const handleUpdate = async () => {
-        await updateLeitos(id, idAirPure, nome, limitCOVT, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade).then(
+        await updateLeitos(id, idAirPure, nome, limitCo2, limitRuidoSonoro, limitLuminosidade, limitTemperatura, limitCOVT, limitUmidade).then(
             () => {
                 setSuccessful(true);
                 setTimeout(() => navigate('/monitored-leitos'), 2000);
