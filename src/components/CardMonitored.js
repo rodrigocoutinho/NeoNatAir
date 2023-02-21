@@ -73,17 +73,16 @@ const CardMonitored = ({ data, handleDelete, handleUpdate }) => {
 
   console.log(data);
   const gravarRelatorio = async (data, airpure) => {
-    var response = await createRelatorios({
-      nome: data.nome,
-      idLeito: data.idLeito,
-      idAirPure: data.idAirPure,
-      temperatura: airpure.temperatura,
-      co2: airpure.co2,
-      tvoc: airpure.tvoc,
-      umidade: airpure.umidade,
-      luminosidade: airpure.luminosidade,
-      ruido: airpure.ruido
-    }
+    var response = await createRelatorios(
+      data.nome,
+      data.idLeito,
+      data.idAirPure,
+      airpure.temperatura,
+      airpure.co2,
+      airpure.tvoc,
+      airpure.umidade,
+      airpure.luminosidade,
+      airpure.ruido
 
     );
     return response.data;
@@ -91,16 +90,16 @@ const CardMonitored = ({ data, handleDelete, handleUpdate }) => {
   setTimeout(() => { gravarRelatorio(data, airpure); }, 10000)
 
   const gravarAlerta = async (data, airpure) => {
-    var response = await alertaCreate({
-      nome: data.nome,
-      idLeito: data.idLeito,
-      temperatura: airpure.temperatura,
-      co2: airpure.co2,
-      tvoc: airpure.tvoc,
-      umidade: airpure.umidade,
-      luminosidade: airpure.luminosidade,
-      ruido: airpure.ruido
-    }
+    var response = await alertaCreate(
+      data.nome,
+      data.idLeito,
+      airpure.temperatura,
+      airpure.co2,
+      airpure.tvoc,
+      airpure.umidade,
+      airpure.luminosidade,
+      airpure.ruido
+    
     );
     return response.data;
   }
