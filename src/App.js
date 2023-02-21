@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Layout from './components/Layout';
 import CreateLeitos from './pages/CreateLeitos';
+import Wellcome from './pages/Wellcome';
 import MonitoredEnvironmente from './pages/MonitoredEnvironment';
 import Report from './pages/Report';
 import UpdateLeito from './pages/UpdateLeito';
