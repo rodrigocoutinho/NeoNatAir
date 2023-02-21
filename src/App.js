@@ -12,7 +12,7 @@ import Users from './pages/Users';
 import UpdateUsers from './pages/UpdateUsers';
 import LoginOrRegister from './pages/LoginOrRegister';
 import RequireAuth from './services/requireAuth';
-import Wellcome from './pages/Wellcome';
+
 
 function App() {
   return (
